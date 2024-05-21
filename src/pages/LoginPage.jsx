@@ -1,6 +1,10 @@
 // import React from "react";
 
+import { useNavigate } from "react-router-dom";
+
 const LoginPage = () => {
+  const navigate = useNavigate()
+
   return (
     <div className="w-full h-screen flex items-start">
       <div className="relative w-2/5 h-full flex flex-col bg-green-900">
@@ -33,7 +37,7 @@ const LoginPage = () => {
           </div>
 
           <div className="w-full flex flex-col py-16">
-            <button className="text-white bg-green-900 rounded-md p-2 text-center flex items-center justify-center">
+            <button onClick={() => navigate('/')} className="text-white bg-green-900 rounded-md p-2 text-center flex items-center justify-center">
               Log in
             </button>
 
