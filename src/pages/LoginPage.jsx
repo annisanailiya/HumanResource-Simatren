@@ -1,6 +1,10 @@
+<<<<<<< Updated upstream:src/pages/LoginPage.jsx
 // import React from "react";
 
 const LoginPage = () => {
+=======
+const LoginPage  = () => {
+>>>>>>> Stashed changes:src/AdminPage/components/pages/LoginPage.jsx
   return (
     <div className="w-full h-screen flex items-start">
       <div className="relative w-2/5 h-full flex flex-col bg-green-900">
