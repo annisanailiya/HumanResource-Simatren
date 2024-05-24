@@ -8,7 +8,7 @@ export default function FormTambahPegawai() {
         <div className="bg-white py-48 rounded-sm border border-gray-200 flex-1 drop-shadow-md ">
 
           {/* Form Tambah Data Pegawai */}
-          <div className="absolute top-6 inset-10 flex gap-4 w-full grid grid-cols-2">
+          <div className="absolute top-6 inset-10 flex gap-4 w-full grid grid-cols-1 md:grid-cols-2">
             <div>
               <div className='flex flex-row mb-2'>
                 <span className='text-gray-900 text-sm font-medium'>Nama Awal</span>

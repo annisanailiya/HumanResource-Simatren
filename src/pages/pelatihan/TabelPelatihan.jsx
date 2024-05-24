@@ -143,7 +143,7 @@ function TabelPelatihan() {
                                     <td>{new Date(pelatihan.tanggal).toLocaleDateString()}</td>
                                     <td>{getPegawaiStatus(pelatihan.status)}</td>
                                     <td className='font-semibold'>
-                                        <button className='flex justify-start items-center'>
+                                        <button onClick={() => navigate('/formdetailpelatihan')} className='flex justify-start items-center'>
                                             {pelatihan.action}
                                             <HiChevronRight fontSize={18} className='ml-2' />
                                         </button>

@@ -9,6 +9,7 @@ import ManajemenGaji from "./pages/gaji/ManajemenGaji.jsx";
 import ManajemenPresensi from "./pages/presensi/ManajemenPresensi.jsx";
 import ManajemenPelatihan from "./pages/pelatihan/ManajemenPelatihan.jsx";
 import TambahPelatihan from "./pages/pelatihan/TambahPelatihan.jsx";
+import DetailPelatihan from "./pages/pelatihan/DetailPelatihan.jsx";
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
 
           <Route path='pelatihan' element={<ManajemenPelatihan />} />
           <Route path='formtambahpelatihan' element={<TambahPelatihan />} />
+          <Route path='formdetailpelatihan' element={<DetailPelatihan />} />
+
+
           
         </Route>
         <Route path='login' element={<LoginPage />} />
