@@ -142,7 +142,7 @@ function ManajemenPegawai() {
                 <input
                     type="text"
                     placeholder="Search..."
-                    className="text-sm focus:outline-none active:outline-none bg-gray-200 border border-gray-200 w-[50rem] h-10 pl-11 pr-4 rounded-sm"
+                    className="text-sm focus:outline-none active:outline-none bg-gray-200 border border-gray-200 w-[48rem] h-10 pl-11 pr-4 rounded-sm"
                 />
                 <div className='flex justify-between'>
                     <HiMiniPlus fontSize={22} className="text-neutral-50 absolute top-1/2 -translate-y-1/2 ml-4" />

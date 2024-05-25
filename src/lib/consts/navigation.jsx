@@ -1,59 +1,39 @@
-import {
-    HiOutlineViewGrid,
-    HiUserGroup,
-    HiOutlineDocumentText,
-    HiOutlineQuestionMarkCircle,
-} from 'react-icons/hi'
-import { 
-    HiCurrencyDollar, 
-    // HiPresentationChartLine,
-} from "react-icons/hi2";
-
+import { MdInsertChartOutlined, MdOutlineCalendarMonth } from "react-icons/md";
+import { HiOutlineUsers } from "react-icons/hi2";
+import { TbWallet, TbLogout } from "react-icons/tb";
 
 export const DASHBOARD_SIDEBAR_LINKS = [
-    {
-        key: 'dashboard',
-        label: 'Dashboard',
-        path: '/',
-        icon: <HiOutlineViewGrid />
-    },
-    {
-        key: 'pegawai',
-        label: 'Manajemen Pegawai',
-        path: '/pegawai',
-        icon: <HiUserGroup />
-    },
-    {
-        key: 'gaji',
-        label: 'Manajemen Gaji',
-        path: '/gaji',
-        icon: <HiCurrencyDollar />
-    },
-    {
-        key: 'presensi',
-        label: 'Manajemen Presensi',
-        path: '/presensi',
-        icon: <HiOutlineDocumentText />
-    },
-    // {
-    //     key: 'pelatihan',
-    //     label: 'Manajemen Pelatihan',
-    //     path: '/pelatihan',
-    //     icon: <HiAcademicCap />
-    // }
-    // {
-    //     key: 'kinerja',
-    //     label: 'Manajemen Kinerja',
-    //     path: '/kinerja',
-    //     icon: <HiPresentationChartLine />
-    // }
+  {
+    key: "dashboard",
+    label: "Dashboard",
+    path: "/",
+    icon: <MdInsertChartOutlined />
+  },
+  {
+    key: "manajemen_pegawai",
+    label: "Manajemen Pegawai",
+    path: "/pegawai",
+    icon: <HiOutlineUsers />
+  },
+  {
+    key: "manajemen_gaji",
+    label: "Manajemen Gaji",
+    path: "/gaji",
+    icon: <TbWallet />
+  },
+  {
+    key: "manajemen_presensi",
+    label: "Manajemen Presensi",
+    path: "/presensi",
+    icon: <MdOutlineCalendarMonth />
+  }
 ]
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
-    {
-        key: 'support',
-        label: 'Help & Support',
-        path: '/support',
-        icon: <HiOutlineQuestionMarkCircle />
-    }
+  {
+    key: "logout",
+    label: "Logout",
+    path: "/logout",
+    icon: <TbLogout />
+  }
 ]

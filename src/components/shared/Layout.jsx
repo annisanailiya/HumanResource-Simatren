@@ -1,17 +1,20 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import Sidebar from './Sidebar'
-import Header from './Header'
+import { Outlet } from "react-router-dom";
+import { useState } from "react";
+import Sidebar from "./Sidebar";
+import Header from "./Header";
 
 export default function Layout() {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
-        <div className='flex flex-row bg-neutral-100 h-screen w-screen overflow-hidden'>
-            <Sidebar />
-            <div className='flex-1'>
-                <Header />
-            <div className="p-4">{<Outlet/>}</div>
-            </div>            
+        <div className="flex h-screen w-screen overflow-hidden">
+            <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
+            <div className="flex flex-col ${isOpen ? 'ml-64' : 'ml-16'} transition-all duration-300 ease-in-out flex-1">
+                <Header isOpen={isOpen} setIsOpen={setIsOpen} />
+                <div className="p-4 overflow-auto">
+                    <Outlet />
+                </div>
+            </div>
         </div>
-    )
+    );
 }

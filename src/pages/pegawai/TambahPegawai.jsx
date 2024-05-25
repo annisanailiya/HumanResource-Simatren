@@ -10,10 +10,10 @@ export default function TambahPegawai() {
       </div>
 
       <div className='py-8 mr-12 ml-12'>
-        <div className="bg-white py-48 rounded-sm border border-gray-200 flex-1 drop-shadow-md ">
+        <div className="bg-white py-52 rounded-sm border border-gray-200 flex-1 drop-shadow-md">
 
           {/* Form Tambah Data Pegawai */}
-          <div className="absolute top-6 inset-10 flex gap-4 w-full grid grid-cols-1 md:grid-cols-2">
+          <div className="absolute top-6 inset-10 flex gap-4 w-full grid grid-cols-1 md:grid-cols-2 overflow-y-scroll">
             <div>
               <div className='flex flex-row mb-2'>
                 <span className='text-gray-900 text-sm font-medium'>Nama Awal</span>
@@ -99,7 +99,7 @@ export default function TambahPegawai() {
               <input
                 type="text"
                 placeholder="Masukkan password"
-                className="text-sm focus:outline-gray-400 active:outline-gray-400 border border-gray-300 w-[24rem] h-10 pl-2 rounded-md"
+                className="text-sm focus:outline-gray-400 active:outline-gray-400 border border-gray-300 w-[24rem] h-10 pl-2 rounded-md mb-4"
               />
             </div>
           </div>
