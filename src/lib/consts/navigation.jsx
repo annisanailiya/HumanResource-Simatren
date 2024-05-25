@@ -2,13 +2,13 @@ import {
     HiOutlineViewGrid,
     HiUserGroup,
     HiOutlineDocumentText,
-    HiAcademicCap,
     HiOutlineQuestionMarkCircle,
 } from 'react-icons/hi'
 import { 
     HiCurrencyDollar, 
-    HiPresentationChartLine,
+    // HiPresentationChartLine,
 } from "react-icons/hi2";
+
 
 export const DASHBOARD_SIDEBAR_LINKS = [
     {
@@ -35,18 +35,18 @@ export const DASHBOARD_SIDEBAR_LINKS = [
         path: '/presensi',
         icon: <HiOutlineDocumentText />
     },
-    {
-        key: 'pelatihan',
-        label: 'Manajemen Pelatihan',
-        path: '/pelatihan',
-        icon: <HiAcademicCap />
-    },
-    {
-        key: 'kinerja',
-        label: 'Manajemen Kinerja',
-        path: '/kinerja',
-        icon: <HiPresentationChartLine />
-    }
+    // {
+    //     key: 'pelatihan',
+    //     label: 'Manajemen Pelatihan',
+    //     path: '/pelatihan',
+    //     icon: <HiAcademicCap />
+    // }
+    // {
+    //     key: 'kinerja',
+    //     label: 'Manajemen Kinerja',
+    //     path: '/kinerja',
+    //     icon: <HiPresentationChartLine />
+    // }
 ]
 
 export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [

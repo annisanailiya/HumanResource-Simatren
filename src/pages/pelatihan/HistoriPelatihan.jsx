@@ -1,9 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useRef } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
-import { HiMiniPlus } from "react-icons/hi2";
 import { HiChevronRight, HiChevronLeft } from "react-icons/hi2";
-import { getPegawaiStatus } from '../../lib/utils/status';
 import { useNavigate } from 'react-router-dom';
 
 const dataPelatihan = [
@@ -13,7 +11,8 @@ const dataPelatihan = [
         nip: '19860926201500',
         nama: 'Albert Eisten',
         kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
+        tgl_mulai: '2024-05-21T05:24:00',
+        tgl_selesai: '2024-05-22T05:24:00',
         status: 'SELESAI',
         action: 'Detail'
     },
@@ -23,8 +22,9 @@ const dataPelatihan = [
         nip: '19860926201500',
         nama: 'Albert Eisten',
         kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
-        status: 'PROSES',
+        tgl_mulai: '2024-05-21T05:24:00',
+        tgl_selesai: '2024-05-22T05:24:00',
+        status: 'SELESAI',
         action: 'Detail'
     },
     {
@@ -33,7 +33,8 @@ const dataPelatihan = [
         nip: '19860926201500',
         nama: 'Albert Eisten',
         kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
+        tgl_mulai: '2024-05-21T05:24:00',
+        tgl_selesai: '2024-05-22T05:24:00',
         status: 'SELESAI',
         action: 'Detail'
     },
@@ -43,8 +44,9 @@ const dataPelatihan = [
         nip: '19860926201500',
         nama: 'Albert Eisten',
         kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
-        status: 'TIDAK DIAMBIL',
+        tgl_mulai: '2024-05-21T05:24:00',
+        tgl_selesai: '2024-05-22T05:24:00',
+        status: 'SELESAI',
         action: 'Detail'
     },
     {
@@ -53,8 +55,9 @@ const dataPelatihan = [
         nip: '19860926201500',
         nama: 'Albert Eisten',
         kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
-        status: 'PROSES',
+        tgl_mulai: '2024-05-21T05:24:00',
+        tgl_selesai: '2024-05-22T05:24:00',
+        status: 'SELESAI',
         action: 'Detail'
     },
     {
@@ -63,7 +66,8 @@ const dataPelatihan = [
         nip: '19860926201500',
         nama: 'Albert Eisten',
         kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
+        tgl_mulai: '2024-05-21T05:24:00',
+        tgl_selesai: '2024-05-22T05:24:00',
         status: 'SELESAI',
         action: 'Detail'
     },
@@ -73,8 +77,9 @@ const dataPelatihan = [
         nip: '19860926201500',
         nama: 'Albert Eisten',
         kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
-        status: 'PROSES',
+        tgl_mulai: '2024-05-21T05:24:00',
+        tgl_selesai: '2024-05-22T05:24:00',
+        status: 'SELESAI',
         action: 'Detail'
     },
     {
@@ -83,7 +88,8 @@ const dataPelatihan = [
         nip: '19860926201500',
         nama: 'Albert Eisten',
         kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
+        tgl_mulai: '2024-05-21T05:24:00',
+        tgl_selesai: '2024-05-22T05:24:00',
         status: 'SELESAI',
         action: 'Detail'
     },
@@ -93,30 +99,28 @@ const dataPelatihan = [
         nip: '19860926201500',
         nama: 'Albert Eisten',
         kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
-        status: 'TIDAK DIAMBIL',
+        tgl_mulai: '2024-05-21T05:24:00',
+        tgl_selesai: '2024-05-22T05:24:00',
+        status: 'SELESAI',
         action: 'Detail'
     }
 ]
 
-function TabelPelatihan() {
+function HistoriPelatihan() {
     const navigate = useNavigate()
 
     return (
         <div>
-            <div className="relative py-4 justify-between flex flex-row">
+            <div className='py-0'>
+                <span className="text-2xl text-gray-950 font-semibold">Histori Pelatihan</span>
+            </div>
+            <div className="relative py-4 flex flex-row">
                 <HiOutlineSearch fontSize={20} className="text-gray-400 absolute top-1/2 left-3 -translate-y-1/2" />
                 <input
                     type="text"
                     placeholder="Search..."
-                    className="text-sm focus:outline-none active:outline-none bg-gray-200 border border-gray-200 w-[48rem] h-10 pl-11 pr-4 rounded-sm"
+                    className="text-sm focus:outline-none active:outline-none bg-gray-200 border border-gray-200 w-full h-10 pl-11 pr-4 rounded-sm"
                 />
-                <div className='flex flex-row'>
-                    <HiMiniPlus fontSize={22} className="text-neutral-50 absolute top-1/2 -translate-y-1/2 ml-4" />
-                    <button onClick={() => navigate('/formtambahpelatihan')} className="text-white bg-green-900 rounded-sm h-10 py-2 px-10 text-center flex items-center">
-                        Atur Jadwal Pelatihan
-                    </button>
-                </div>
             </div>
 
             <div className="bg-white px-4 rounded-sm border border-gray-200 flex-1 items-center">
@@ -128,8 +132,8 @@ function TabelPelatihan() {
                                 <td className='font-bold'>NIP</td>
                                 <td className='font-bold'>Nama</td>
                                 <td className='font-bold'>Nama Kegiatan</td>
-                                <td className='font-bold'>Tanggal</td>
-                                <td className='font-bold'>Status</td>
+                                <td className='font-bold'>Tanggal Mulai</td>
+                                <td className='font-bold'>Tanggal Selesai</td>
                                 <td className='font-bold'>Action</td>
                             </tr>
                         </thead>
@@ -140,10 +144,10 @@ function TabelPelatihan() {
                                     <td>{pelatihan.nip}</td>
                                     <td>{pelatihan.nama}</td>
                                     <td>{pelatihan.kegiatan}</td>
-                                    <td>{new Date(pelatihan.tanggal).toLocaleDateString()}</td>
-                                    <td>{getPegawaiStatus(pelatihan.status)}</td>
+                                    <td>{new Date(pelatihan.tgl_mulai).toLocaleDateString()}</td>
+                                    <td>{new Date(pelatihan.tgl_selesai).toLocaleDateString()}</td>
                                     <td className='font-semibold'>
-                                        <button onClick={() => navigate('/formdetailpelatihan')} className='flex justify-start items-center'>
+                                        <button onClick={() => navigate('/detailhistori')} className='flex justify-start items-center'>
                                             {pelatihan.action}
                                             <HiChevronRight fontSize={18} className='ml-2' />
                                         </button>
@@ -175,4 +179,4 @@ function BoxWrapper({ children }) {
     return <button className="bg-neutral-100 rounded-sm px-2.5 py-1 flex-1 border-none flex items-center text-xs font-semibold hover:bg-green-900 active:bg-green-900 focus:outline-none focus:bg focus:bg-green-900">{children}</button>
 }
 
-export default TabelPelatihan
+export default HistoriPelatihan

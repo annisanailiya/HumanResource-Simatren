@@ -7,9 +7,11 @@ import TambahPegawai from "./pages/pegawai/TambahPegawai.jsx";
 import DetailPegawai from "./pages/pegawai/DetailPegawai.jsx";
 import ManajemenGaji from "./pages/gaji/ManajemenGaji.jsx";
 import ManajemenPresensi from "./pages/presensi/ManajemenPresensi.jsx";
-import ManajemenPelatihan from "./pages/pelatihan/ManajemenPelatihan.jsx";
 import TambahPelatihan from "./pages/pelatihan/TambahPelatihan.jsx";
-import DetailPelatihan from "./pages/pelatihan/DetailPelatihan.jsx";
+import JadwalPelatihan from "./pages/pelatihan/JadwalPelatihan.jsx";
+import HistoriPelatihan from "./pages/pelatihan/HistoriPelatihan.jsx";
+import DetailHistoriPelatihan from "./pages/pelatihan/DetailHistoriPelatihan.jsx";
+import DetailJadwalPelatihan from "./pages/pelatihan/DetailJadwalPelatihan.jsx";
 
 function App() {
   return (
@@ -23,14 +25,15 @@ function App() {
           <Route path='formdetailpegawai' element={<DetailPegawai />} />
 
           <Route path='gaji' element={<ManajemenGaji />} />
+
           <Route path='presensi' element={<ManajemenPresensi />} />
 
-          <Route path='pelatihan' element={<ManajemenPelatihan />} />
+          <Route path='historipelatihan' element={<HistoriPelatihan />} />
+          <Route path='jadwalpelatihan' element={<JadwalPelatihan />} />
           <Route path='formtambahpelatihan' element={<TambahPelatihan />} />
-          <Route path='formdetailpelatihan' element={<DetailPelatihan />} />
+          <Route path='detailhistori' element={<DetailHistoriPelatihan />} />
+          <Route path='detailjadwal' element={<DetailJadwalPelatihan />} />
 
-
-          
         </Route>
         <Route path='login' element={<LoginPage />} />
         {/* <LoginPage /> */}

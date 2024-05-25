@@ -4,7 +4,7 @@ const detailPegawai = [
     {
         id: '1',
         nip: '19860926201500',
-        nama: 'Shirley A. Lape',
+        nama: 'Albert Eisten',
         tgl_mulai: '2024-05-21T05:24:00',
         tgl_selesai: '2024-05-22T05:24:00',
         nama_kegiatan: 'Pelatihan Mengajar',
@@ -14,9 +14,14 @@ const detailPegawai = [
     }
 ]
 
-export default function FormDetailPelatihan() {
+export default function DetailHistoriPelatihan() {
     return (
         <div>
+
+            <div className='py-0'>
+                <span className="text-2xl text-gray-950 font-semibold flex justify-center">Detail Pelatihan</span>
+            </div>
+
             <div className='py-4 mr-36 ml-36'>
                 <div className="bg-white py-60 rounded-sm border border-gray-200 flex-1 drop-shadow-md h-[26rem] scrollbar-w-2 overflow-y-scroll">
                     <div className="absolute top-5 w-full flex justify-center">
