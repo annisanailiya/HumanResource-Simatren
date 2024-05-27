@@ -3,8 +3,8 @@ import { RiHistoryFill, RiCalendarScheduleLine } from "react-icons/ri";
 import { HiChevronDown, HiAcademicCap } from "react-icons/hi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import classNames from "classnames";
-import { DASHBOARD_SIDEBAR_BOTTOM_LINKS, DASHBOARD_SIDEBAR_LINKS } from "../../lib/consts/navigation";
 import { useState } from "react";
+import { DASHBOARD_SIDEBAR_BOTTOM_LINKS, DASHBOARD_SIDEBAR_LINKS } from "../../lib/consts/navigation";
 
 const linkClasses = "flex items-center gap-3 font-semibold px-4 py-3 hover:scale-95 hover:bg-[#98FB98] hover:text-green-900 hover:no-underline active:bg-[#98FB98] rounded-md text-sm";
 

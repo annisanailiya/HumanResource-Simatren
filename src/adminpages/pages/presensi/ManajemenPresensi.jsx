@@ -97,9 +97,12 @@ const dataPresensi = [
 
 ]
 
-function TabelPresensi() {
+function ManajemenPresensi() {
     return (
         <div>
+            <div className='py-0'>
+                <span className="text-2xl text-gray-950 font-semibold">Data Presensi</span>
+            </div>
             <div className="relative py-4 justify-between flex flex-row">
                 <HiOutlineSearch fontSize={20} className="text-gray-400 absolute top-1/2 left-3 -translate-y-1/2" />
                 <input
@@ -160,4 +163,4 @@ function BoxWrapper({ children }) {
     return <button className="bg-neutral-100 rounded-sm px-2.5 py-1 flex-1 border-none flex items-center text-xs font-semibold hover:bg-green-900 active:bg-green-900 focus:outline-none focus:bg focus:bg-green-900">{children}</button>
 }
 
-export default TabelPresensi
+export default ManajemenPresensi

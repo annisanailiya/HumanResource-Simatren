@@ -3,121 +3,151 @@ import React, { useEffect, useRef } from 'react'
 import { HiOutlineSearch } from 'react-icons/hi'
 import { HiMiniPlus } from "react-icons/hi2";
 import { HiChevronRight, HiChevronLeft } from "react-icons/hi2";
-import { getPegawaiStatus } from '../../lib/utils/status';
 import { useNavigate } from 'react-router-dom';
+import { getPegawaiStatus } from '../../lib/utils/status';
 
-const dataPelatihan = [
+const dataPegawai = [
     {
         id: '1',
         nomor: '1',
         nip: '19860926201500',
-        nama: 'Albert Eisten',
-        kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
-        status: 'PROSES',
+        nama: 'Shirley A. Lape',
+        gender: 'perempuan',
+        role: 'guru',
+        status_pegawai: 'AKTIF',
         action: 'Detail'
     },
     {
-        id: '1',
+        id: '2',
         nomor: '2',
         nip: '19860926201500',
-        nama: 'Albert Eisten',
-        kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
-        status: 'PROSES',
+        nama: 'Shirley A. Lape',
+        gender: 'perempuan',
+        role: 'guru',
+        status_pegawai: 'AKTIF',
         action: 'Detail'
     },
     {
-        id: '1',
+        id: '3',
         nomor: '3',
         nip: '19860926201500',
-        nama: 'Albert Eisten',
-        kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
-        status: 'PROSES',
+        nama: 'Shirley A. Lape',
+        gender: 'perempuan',
+        role: 'guru',
+        status_pegawai: 'TIDAK AKTIF',
         action: 'Detail'
     },
     {
-        id: '1',
+        id: '4',
         nomor: '4',
         nip: '19860926201500',
-        nama: 'Albert Eisten',
-        kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
-        status: 'BELUM DIAMBIL',
+        nama: 'Shirley A. Lape',
+        gender: 'perempuan',
+        role: 'guru',
+        status_pegawai: 'TIDAK AKTIF',
         action: 'Detail'
     },
     {
-        id: '1',
+        id: '5',
         nomor: '5',
         nip: '19860926201500',
-        nama: 'Albert Eisten',
-        kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
-        status: 'BELUM DIAMBIL',
+        nama: 'Shirley A. Lape',
+        gender: 'perempuan',
+        role: 'guru',
+        status_pegawai: 'CUTI',
         action: 'Detail'
     },
     {
-        id: '1',
+        id: '6',
         nomor: '6',
         nip: '19860926201500',
-        nama: 'Albert Eisten',
-        kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
-        status: 'BELUM DIAMBIL',
+        nama: 'Shirley A. Lape',
+        gender: 'perempuan',
+        role: 'guru',
+        status_pegawai: 'tidak tau',
         action: 'Detail'
     },
     {
         id: '1',
         nomor: '7',
         nip: '19860926201500',
-        nama: 'Albert Eisten',
-        kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
-        status: 'BELUM DIAMBIL',
+        nama: 'Shirley A. Lape',
+        gender: 'perempuan',
+        role: 'guru',
+        status_pegawai: 'AKTIF',
         action: 'Detail'
     },
     {
-        id: '1',
+        id: '2',
         nomor: '8',
         nip: '19860926201500',
-        nama: 'Albert Eisten',
-        kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
-        status: 'BELUM DIAMBIL',
+        nama: 'Shirley A. Lape',
+        gender: 'perempuan',
+        role: 'guru',
+        status_pegawai: 'AKTIF',
         action: 'Detail'
     },
     {
-        id: '1',
+        id: '3',
         nomor: '9',
         nip: '19860926201500',
-        nama: 'Albert Eisten',
-        kegiatan: 'Pelatihan Mengajar',
-        tanggal: '2024-05-21T05:24:00',
-        status: 'BELUM DIAMBIL',
+        nama: 'Shirley A. Lape',
+        gender: 'perempuan',
+        role: 'guru',
+        status_pegawai: 'TIDAK AKTIF',
+        action: 'Detail'
+    },
+    {
+        id: '4',
+        nomor: '10',
+        nip: '19860926201500',
+        nama: 'Shirley A. Lape',
+        gender: 'perempuan',
+        role: 'guru',
+        status_pegawai: 'TIDAK AKTIF',
+        action: 'Detail'
+    },
+    {
+        id: '5',
+        nomor: '11',
+        nip: '19860926201500',
+        nama: 'Shirley A. Lape',
+        gender: 'perempuan',
+        role: 'guru',
+        status_pegawai: 'CUTI',
+        action: 'Detail'
+    },
+    {
+        id: '6',
+        nomor: '12',
+        nip: '19860926201500',
+        nama: 'Shirley A. Lape',
+        gender: 'perempuan',
+        role: 'guru',
+        status_pegawai: 'tidak tau',
         action: 'Detail'
     }
 ]
 
-function JadwalPelatihan() {
+function ManajemenPegawai() {
     const navigate = useNavigate()
 
     return (
         <div>
             <div className='py-0'>
-                <span className="text-2xl text-gray-950 font-semibold">Jadwal Pelatihan</span>
+                <span className="text-2xl text-gray-950 font-semibold">Manajemen Pegawai</span>
             </div>
             <div className="relative py-4 justify-between flex flex-row">
                 <HiOutlineSearch fontSize={20} className="text-gray-400 absolute top-1/2 left-3 -translate-y-1/2" />
                 <input
                     type="text"
                     placeholder="Search..."
-                    className="text-sm focus:outline-none active:outline-none bg-gray-200 border border-gray-200 w-[46rem] h-10 pl-11 pr-4 rounded-sm"
+                    className="text-sm focus:outline-none active:outline-none bg-gray-200 border border-gray-200 w-[48rem] h-10 pl-11 pr-4 rounded-sm"
                 />
-                <div className='flex flex-row'>
+                <div className='flex justify-between'>
                     <HiMiniPlus fontSize={22} className="text-neutral-50 absolute top-1/2 -translate-y-1/2 ml-4" />
-                    <button onClick={() => navigate('/formtambahpelatihan')} className="text-white bg-green-900 rounded-sm h-10 py-2 px-10 text-center flex items-center">
-                        Atur Jadwal Pelatihan
+                    <button onClick={() => navigate('/formtambahpegawai')} className="text-white bg-green-900 rounded-sm h-10 py-2 px-10 text-center flex items-center">
+                        Tambah Pegawai
                     </button>
                 </div>
             </div>
@@ -130,24 +160,24 @@ function JadwalPelatihan() {
                                 <td className='font-bold'>No.</td>
                                 <td className='font-bold'>NIP</td>
                                 <td className='font-bold'>Nama</td>
-                                <td className='font-bold'>Nama Kegiatan</td>
-                                <td className='font-bold'>Tanggal</td>
+                                <td className='font-bold'>Gender</td>
+                                <td className='font-bold'>Role</td>
                                 <td className='font-bold'>Status</td>
                                 <td className='font-bold'>Action</td>
                             </tr>
                         </thead>
                         <tbody>
-                            {dataPelatihan.map((pelatihan) => (
-                                <tr key={pelatihan.id}>
-                                    <td>{pelatihan.nomor}</td>
-                                    <td>{pelatihan.nip}</td>
-                                    <td>{pelatihan.nama}</td>
-                                    <td>{pelatihan.kegiatan}</td>
-                                    <td>{new Date(pelatihan.tanggal).toLocaleDateString()}</td>
-                                    <td>{getPegawaiStatus(pelatihan.status)}</td>
+                            {dataPegawai.map((data) => (
+                                <tr key={data.nomor}>
+                                    <td>{data.nomor}</td>
+                                    <td>{data.nip}</td>
+                                    <td>{data.nama}</td>
+                                    <td>{data.gender}</td>
+                                    <td>{data.role}</td>
+                                    <td>{getPegawaiStatus(data.status_pegawai)}</td>
                                     <td className='font-semibold'>
-                                        <button onClick={() => navigate('/detailjadwal')} className='flex justify-start items-center'>
-                                            {pelatihan.action}
+                                        <button onClick={() => navigate('/formdetailpegawai')} className='flex justify-start items-center'>
+                                            {data.action}
                                             <HiChevronRight fontSize={18} className='ml-2' />
                                         </button>
                                     </td>
@@ -178,4 +208,4 @@ function BoxWrapper({ children }) {
     return <button className="bg-neutral-100 rounded-sm px-2.5 py-1 flex-1 border-none flex items-center text-xs font-semibold hover:bg-green-900 active:bg-green-900 focus:outline-none focus:bg focus:bg-green-900">{children}</button>
 }
 
-export default JadwalPelatihan
+export default ManajemenPegawai
