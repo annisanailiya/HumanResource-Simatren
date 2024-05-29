@@ -16,8 +16,14 @@ import DetailJadwalPelatihan from './AdminPage/components/pages/Manajemen-Pelati
 import DetailHistoryPelatihan from './AdminPage/components/pages/Manajemen-Pelatihan/DetailHistoryPelatihan';
 
 
+<<<<<<< Updated upstream
 // import Layout from "./UserPage/components/content/Layout";
     
+=======
+import { AuthProvider } from './AuthContext';
+import PrivateRoute from './PrivateRoute';
+import JadwalPelatihanUser from './UserPage/components/pages/Pelatihan/JadwalPelatihanUser';
+>>>>>>> Stashed changes
 
 function App() {
   return (
@@ -33,7 +39,21 @@ function App() {
                 <Route path="/AdminPage/manajemen_gaji" element={<ManajemenGaji />} />
                 <Route path="/AdminPage/tambah_data_gaji" element={<TambahDataGaji />} />
 
+<<<<<<< Updated upstream
                 <Route path="/AdminPage/manajemen_presensi" element={<ManajemenPresensi />} />
+=======
+          {/* User Page */}
+          <Route path="/UserPage" element={<PrivateRoute allowedRoles={['user']}><LayoutUser /></PrivateRoute>}>
+            <Route index element={<ProfilEdit />} />
+            <Route path="/UserPage/presensi" element={<Presensi />} />
+            <Route path="/UserPage/penggajian" element={<Penggajian />} />
+            <Route path="/UserPage/pengajuan_cuti" element={<PengajuanCuti />} />
+            <Route path="/UserPage/histori_cuti" element={<HistoriCuti />} />
+            <Route path="/UserPage/pelaporan_pelatihan" element={<PelaporanPelatihan />} />
+            <Route path="/UserPage/histori_pelatihan" element={<HistoriPelatihan />} />
+            <Route path="/UserPage/jadwal_pelatihan" element={<JadwalPelatihanUser />} />
+          </Route>
+>>>>>>> Stashed changes
 
                 <Route path="/AdminPage/histori_pelatihan" element={<HistoryPelatihan />} />
                 <Route path="/AdminPage/jadwal_pelatihan" element={<JadwalPelatihan />} />
