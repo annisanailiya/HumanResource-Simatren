@@ -4,6 +4,7 @@ TASK
 - ubah alert login
 - forgot password login
 - masukkin jadwal pelatihan,
+- detail data pelatihan edit supaya bisa nampilin bukti pelatihan
 - buat halaman kinerja admin & user
 - buat halaman presensi user langsung ke kamera scanner
 - hasil download data diubah ke pdf,
