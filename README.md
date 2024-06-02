@@ -1,16 +1,16 @@
 TASK
 
 - selesain search,
-- ubah alert login
+- ubah alert login ✔
 - forgot password login
-- masukkin jadwal pelatihan,
-- detail data pelatihan edit supaya bisa nampilin bukti pelatihan
+- masukkin jadwal pelatihan ✔
+- detail data pelatihan edit supaya bisa nampilin bukti pelatihan ✔
 - buat halaman kinerja admin & user
 - buat halaman presensi user langsung ke kamera scanner
-- hasil download data diubah ke pdf (done)
-- manajemen pegawai admin ditambah data keluarga dan BPJS
+- hasil download data diubah ke pdf ✔
+- manajemen pegawai admin ditambah data keluarga dan BPJS ✔
 - data profil user disesuaikan dengan manajemen pegawai admin
-- sidebar user untuk presensi dibuat dropdown (histori, scan qr) (done)
+- sidebar user untuk presensi dibuat dropdown (histori, scan qr) ✔
 - Grafik kinerja user itu ngambil data hasil presensi, amalan amalan yg sudah dilakukan
 - Gaji dibagian user bentuk tabel saja, dibagian admin bukan tambah data gaji, tapi excel
 - Di admin tetap ada grafik kinerja setiap pegawai yang bisa dilihat detail nya gitu
