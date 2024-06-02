@@ -1,8 +1,8 @@
 TASK
 
-- selesain search,
+- selesain search ✔
 - ubah alert login ✔
-- forgot password login
+- forgot password login ✔
 - masukkin jadwal pelatihan ✔
 - detail data pelatihan edit supaya bisa nampilin bukti pelatihan ✔
 - buat halaman kinerja admin & user
