@@ -5,7 +5,7 @@ TASK
 - forgot password login ✔ => lengkapi lagi waktu back end
 - masukkin jadwal pelatihan ✔
 - detail data pelatihan edit supaya bisa nampilin bukti pelatihan ✔ => gambar ambil dari db
-- buat halaman kinerja admin & user
+- buat halaman kinerja admin & user ✔
 - buat halaman presensi user langsung ke kamera scanner
 - hasil download data diubah ke pdf ✔
 - manajemen pegawai admin ditambah data keluarga dan BPJS ✔ => lengkapi lagi sesuai data karyawan
