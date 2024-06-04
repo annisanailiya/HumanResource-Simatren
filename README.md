@@ -1,14 +1,17 @@
 TASK
+✔ => finish dev
+✔✔ => finish merge dev
+✔✔✔ => fix finish
 
-- selesain search ✔
-- ubah alert login ✔
-- forgot password login ✔ => lengkapi lagi waktu back end
-- masukkin jadwal pelatihan ✔
-- detail data pelatihan edit supaya bisa nampilin bukti pelatihan ✔ => gambar ambil dari db
+- selesain search ✔✔
+- ubah alert login ✔✔
+- forgot password login ✔ (lengkapi lagi waktu back end)
+- masukkin jadwal pelatihan ✔✔
+- detail data pelatihan edit supaya bisa nampilin bukti pelatihan ✔ (gambar ambil dari db)
 - buat halaman kinerja admin & user ✔
 - buat halaman presensi user langsung ke kamera scanner
-- hasil download data diubah ke pdf ✔
-- manajemen pegawai admin ditambah data keluarga dan BPJS ✔ => lengkapi lagi sesuai data karyawan
+- hasil download data diubah ke pdf ✔✔
+- manajemen pegawai admin ditambah data keluarga dan BPJS ✔ (lengkapi lagi sesuai data karyawan)
 - data profil user disesuaikan dengan manajemen pegawai admin 
 - sidebar user untuk presensi dibuat dropdown (histori, scan qr) ✔
 - Grafik kinerja user itu ngambil data hasil presensi, amalan amalan yg sudah dilakukan
