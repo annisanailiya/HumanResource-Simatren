@@ -23,17 +23,17 @@ const LoginPage = () => {
         login('admin');
         navigate('/AdminPage');
       } else {
-        alert('Invalid admin credentials');
+        alert('Data Admin Tidak Cocok');
       }
     } else if (selectedOption === 'user') {
       if (email === userCredentials.email && password === userCredentials.password) {
         login('user');
         navigate('/UserPage');
       } else {
-        alert('Invalid user credentials');
+        alert('Data User Tidak Cocok');
       }
     } else {
-      alert('Please select a role');
+      alert('Lengkapi Data Terlebih Dahulu');
     }
   };
 
@@ -115,7 +115,9 @@ const LoginPage = () => {
             </button>
 
             <div className="w-full flex items-center justify-center p-3">
-              <span className="text-xs font-sans text-green-900 cursor-pointer">Forgot Password?</span>
+              <span onClick={() => navigate('/forgot_password')} className="text-xs font-sans text-green-900 cursor-pointer">
+                Forgot Password?
+              </span>
             </div>
           </div>
         </div>

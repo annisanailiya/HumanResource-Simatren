@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi'
 import { HiMiniPlus } from "react-icons/hi2";
 import { HiChevronRight } from "react-icons/hi2";
@@ -5,49 +6,49 @@ import { getPegawaiStatus } from '../../utils/status';
 import { useNavigate } from 'react-router-dom';
 
 
-const dataPelatihan = [
+const dataJadwal = [
   {
       id: '1',
       nomor: '1',
-      kegiatan: 'Pelatihan Mengajar',
+      kegiatan: ' Mengajar',
       tanggal: '2024-05-21T05:24:00',
       status: 'PROSES',
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '2',
       nomor: '2',
-      kegiatan: 'Pelatihan Mengajar',
+      kegiatan: 'Pelatihan ',
       tanggal: '2024-05-21T05:24:00',
       status: 'PROSES',
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '3',
       nomor: '3',
-      kegiatan: 'Pelatihan Mengajar',
+      kegiatan: 'evaluasi',
       tanggal: '2024-05-21T05:24:00',
       status: 'PROSES',
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '4',
       nomor: '4',
-      kegiatan: 'Pelatihan Mengajar',
+      kegiatan: 'cek',
       tanggal: '2024-05-21T05:24:00',
       status: 'BELUM DIMULAI',
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '5',
       nomor: '5',
-      kegiatan: 'Pelatihan Mengajar',
+      kegiatan: 'Pelatihan Komputer',
       tanggal: '2024-05-21T05:24:00',
-      status: 'BELUM DIMULAIDIMULAI',
+      status: 'BELUM DIMULAI',
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '6',
       nomor: '6',
       kegiatan: 'Pelatihan Mengajar',
       tanggal: '2024-05-21T05:24:00',
@@ -55,7 +56,7 @@ const dataPelatihan = [
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '7',
       nomor: '7',
       kegiatan: 'Pelatihan Mengajar',
       tanggal: '2024-05-21T05:24:00',
@@ -63,7 +64,7 @@ const dataPelatihan = [
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '8',
       nomor: '8',
       kegiatan: 'Pelatihan Mengajar',
       tanggal: '2024-05-21T05:24:00',
@@ -71,7 +72,7 @@ const dataPelatihan = [
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '9',
       nomor: '9',
       kegiatan: 'Pelatihan Mengajar',
       tanggal: '2024-05-21T05:24:00',
@@ -81,7 +82,16 @@ const dataPelatihan = [
 ]
 
 function JadwalPelatihan() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredJadwal = dataJadwal.filter((data) =>
+    data.kegiatan.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
@@ -93,7 +103,9 @@ function JadwalPelatihan() {
           type="text"
           placeholder="Search..."
           className="text-sm focus:outline-none active:outline-none bg-gray-200 border border-gray-200 w-2/3 h-10 pl-11 rounded-sm"
-        />
+          value={searchTerm}
+          onChange={handleSearchChange}       
+       />
       
         <div className='flex justify-between mx-2 md:mx-10'>
           <HiMiniPlus fontSize={22} className="text-neutral-50 absolute top-1/2 -translate-y-1/2 ml-2" />
@@ -117,7 +129,7 @@ function JadwalPelatihan() {
             </thead>
 
             <tbody>
-              {dataPelatihan.map((pelatihan) => (
+              {filteredJadwal.map((pelatihan) => (
               <tr key={pelatihan.id}>
                 <td className="p-1 pt-2">{pelatihan.nomor}</td>
                 <td>{pelatihan.kegiatan}</td>

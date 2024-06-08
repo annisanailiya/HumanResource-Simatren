@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 const PelaporanPelatihan = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [namaKegiatan, setNamaKegiatan] = useState('');
   const [tanggalMulai, setTanggalMulai] = useState('');
   const [tanggalSelesai, setTanggalSelesai] = useState('');
@@ -39,10 +39,17 @@ const PelaporanPelatihan = () => {
 
   return (
     <div className="px-5">
-      <div className="relative py-4 w-fit md:w-full justify-between flex flex-row">
+      <div className="relative py-4 w-full flex justify-between items-center">
         <p className="text-xl font-bold mb-4 px-5">Pelaporan Pelatihan</p>
 
-        <div className="mx-2">
+        <div className="mx-2 flex justify-end gap-6">
+          <button
+            type="button"
+            onClick={() => navigate('/UserPage/jadwal_pelatihan')}
+            className="w-fit text-black bg-gray-300 hover:bg-green-900 hover:text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          >
+            Lihat Jadwal
+          </button>
           <button
             type="button"
             onClick={() => navigate('/UserPage/histori_pelatihan')}
@@ -53,13 +60,12 @@ const PelaporanPelatihan = () => {
         </div>
       </div>
 
-      <div className='md:w-[100%] w-[90%] mx-auto h-full flex flex-col py-5 justify-betwee'>
+      <div className='md:w-[100%] w-[90%] mx-auto h-full flex flex-col py-5 justify-between'>
         <div className="relative rounded-sm box-border border border-gray-200 shadow-lg shadow-gray-500 p-10">
-
-          {/* Form Pengajuan Cuti */}
           <form className="space-y-6">
-              <div>
-                <table className="w-full">
+            <div>
+              <table className="w-full">
+                <tbody>
                   <tr>
                     <td className="p-2 text-sm">Nama Kegiatan<span className="text-red-600">*</span></td>
                     <td className="p-2">:</td>
@@ -92,7 +98,6 @@ const PelaporanPelatihan = () => {
                       />
                     </td>
                   </tr>
-
                   <tr>
                     <td className="p-2 text-sm">Tanggal Selesai Cuti<span className="text-red-600">*</span></td>
                     <td className="p-2">:</td>
@@ -109,7 +114,6 @@ const PelaporanPelatihan = () => {
                       />
                     </td>
                   </tr>
-
                   <tr>
                     <td className="p-2 text-sm">Bukti Kegiatan<span className="text-red-600">*</span></td>
                     <td className="p-2">:</td>
@@ -124,8 +128,9 @@ const PelaporanPelatihan = () => {
                       />
                     </td>
                   </tr>
-                </table>
-              </div>
+                </tbody>
+              </table>
+            </div>
           </form>
         </div>
       </div>
@@ -134,7 +139,7 @@ const PelaporanPelatihan = () => {
         <button
           type="submit"
           onClick={handleSubmit}
-          className="w-28 text-black bg-gray-300 hover:bg-green-900 hover:text-white focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          className="w-fit text-black bg-gray-300 hover:bg-green-900 hover:text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center"
         >
           Kirim
         </button>
@@ -147,10 +152,8 @@ const PelaporanPelatihan = () => {
           </div>
         </div>
       )}
-
     </div>
-  )
-}
+  );
+};
 
 export default PelaporanPelatihan;
-

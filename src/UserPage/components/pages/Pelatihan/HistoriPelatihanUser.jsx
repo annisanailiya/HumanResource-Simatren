@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { getStatus } from "../../utils/status";
 
@@ -6,7 +7,7 @@ const dataPelatihan = [
       id: '1',
       nomor: '1',
       nip: '4535634657',
-      nama_kegiatan: 'Pelatihan Komputer',
+      nama_kegiatan: 'Pelatihan mtk',
       tanggal_mulai: '2024-05-14T05:24:00',
       tanggal_selesai: '2024-05-14T05:24:00',
       status: 'PROSES'
@@ -24,7 +25,7 @@ const dataPelatihan = [
   id: '3',
   nomor: '3',
   nip: '4535634657',
-  nama_kegiatan: 'Pelatihan Komputer',
+  nama_kegiatan: 'Pelatihan kimia',
   tanggal_mulai: '2024-05-14T05:24:00',
   tanggal_selesai: '2024-05-14T05:24:00',
   status: 'PROSES'
@@ -33,7 +34,7 @@ const dataPelatihan = [
   id: '4',
   nomor: '4',
   nip: '4535634657',
-  nama_kegiatan: 'Pelatihan Komputer',
+  nama_kegiatan: 'Pelatihan fisika',
   tanggal_mulai: '2024-05-14T05:24:00',
   tanggal_selesai: '2024-05-14T05:24:00',
   status: 'PROSES'
@@ -41,7 +42,7 @@ const dataPelatihan = [
 {
   id: '5',
   nomor: '5',
-  nip: '4535634657',
+  nip: '111111111111',
   nama_kegiatan: 'Pelatihan Komputer',
   tanggal_mulai: '2024-05-14T05:24:00',
   tanggal_selesai: '2024-05-14T05:24:00',
@@ -94,7 +95,18 @@ const dataPelatihan = [
 },
 ]
 
-function HistoriPelatihan() {
+function HistoriPelatihanUser() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredPelatihan = dataPelatihan.filter((data) =>
+    data.nama_kegiatan.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    data.nip.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
       <p className="text-xl font-bold px-5">Histori Pelatihan</p>
@@ -105,6 +117,8 @@ function HistoriPelatihan() {
               type="text"
               placeholder="Search..."
               className="text-sm focus:outline-none active:outline-none bg-gray-200 border border-gray-200 w-full h-10 pl-11 pr-4 rounded-sm"
+              value={searchTerm}
+              onChange={handleSearchChange}
             />
           </div>
 
@@ -123,7 +137,7 @@ function HistoriPelatihan() {
             </thead>
 
             <tbody>
-              {dataPelatihan.map((pelatihan) => (
+              {filteredPelatihan.map((pelatihan) => (
                 <tr key={pelatihan.id}>
                   <td className="p-1 pt-2">{pelatihan.nomor}</td>
                   <td className="p-1 pt-2">{pelatihan.nip}</td>
@@ -156,4 +170,4 @@ function HistoriPelatihan() {
 //   return <button className="bg-neutral-100 rounded-sm px-2.5 py-1 flex-1 border-none flex items-center text-xs font-semibold hover:bg-green-900 active:bg-green-900 focus:outline-none focus:bg focus:bg-green-900">{children}</button>
 // }
 
-export default HistoriPelatihan;
+export default HistoriPelatihanUser;

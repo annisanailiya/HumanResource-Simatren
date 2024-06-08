@@ -81,7 +81,7 @@ export default function DetailDataPegawai() {
       <div className='md:w-[100%] w-[90%] mx-auto h-full flex flex-col justify-between'>
         <div className="box-border rounded-sm border border-gray-200 flex-1 shadow-lg overflow-auto">
           <div className="flex flex-col md:flex-row">
-            <div className="box-border relative md:w-1/5 h-56 bg-gray-300 justify-center items-center flex flex-col rounded-sm mx-10 mt-5 md:mt-20">
+            <div className="box-border relative md:w-1/5 h-56 bg-gray-300 justify-center items-center flex flex-col rounded-sm mx-10 mt-6">
               <FaUserCircle className="text-8xl text-gray-500"/>
               <div>
                 {pegawai.map((data) => (
@@ -214,6 +214,62 @@ export default function DetailDataPegawai() {
                           type="text"
                           name="role"
                           value={data.role}
+                          readOnly={!isEditable}
+                          onChange={(e) => handleChange(e, data.id)}
+                          className={`w-full border-none bg-transparent focus:outline-none ${isEditable ? 'bg-white' : ''}`}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Status BPJS</td>
+                      <td className="p-2">:</td>
+                      <td className="px-2 border border-gray-400 rounded-md">
+                        <input
+                          type="text"
+                          name="status_bpjs"
+                          value={data.status_bpjs}
+                          readOnly={!isEditable}
+                          onChange={(e) => handleChange(e, data.id)}
+                          className={`w-full border-none bg-transparent focus:outline-none ${isEditable ? 'bg-white' : ''}`}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Status Perkawinan</td>
+                      <td className="p-2">:</td>
+                      <td className="px-2 border border-gray-400 rounded-md">
+                        <input
+                          type="text"
+                          name="status_perkawinan"
+                          value={data.status_perkawinan}
+                          readOnly={!isEditable}
+                          onChange={(e) => handleChange(e, data.id)}
+                          className={`w-full border-none bg-transparent focus:outline-none ${isEditable ? 'bg-white' : ''}`}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Data Anggota Keluarga</td>
+                      <td className="p-2">:</td>
+                      <td className="px-2 border border-gray-400 rounded-md">
+                        <input
+                          type="text"
+                          name="data_keluarga"
+                          value={data.data_keluarga}
+                          readOnly={!isEditable}
+                          onChange={(e) => handleChange(e, data.id)}
+                          className={`w-full border-none bg-transparent focus:outline-none ${isEditable ? 'bg-white' : ''}`}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Jumlah Tanggungan</td>
+                      <td className="p-2">:</td>
+                      <td className="px-2 border border-gray-400 rounded-md">
+                        <input
+                          type="number"
+                          name="jumlah_tanggungan"
+                          value={data.jumlah_tanggungan}
                           readOnly={!isEditable}
                           onChange={(e) => handleChange(e, data.id)}
                           className={`w-full border-none bg-transparent focus:outline-none ${isEditable ? 'bg-white' : ''}`}

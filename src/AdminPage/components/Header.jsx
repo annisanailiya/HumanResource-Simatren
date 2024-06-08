@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { MdNotifications } from "react-icons/md";
 import { FaBars } from "react-icons/fa";
 

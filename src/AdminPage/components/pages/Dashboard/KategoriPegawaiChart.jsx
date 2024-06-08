@@ -52,9 +52,6 @@ export default function KategoriPegawaiChart() {
 					</PieChart>
 				</ResponsiveContainer>
 			</div>
-      <div>
-        
-      </div>
 		</div>
 	)
 }

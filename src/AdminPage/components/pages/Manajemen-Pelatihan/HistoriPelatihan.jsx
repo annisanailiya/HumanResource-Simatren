@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi'
 import { HiChevronRight } from "react-icons/hi2";
 import { useNavigate } from 'react-router-dom';
@@ -6,8 +7,8 @@ const dataPelatihan = [
   {
       id: '1',
       nomor: '1',
-      nip: '19860926201500',
-      nama: 'Albert Eisten',
+      nip: '7773367578',
+      nama: 'Albert ',
       kegiatan: 'Pelatihan Mengajar',
       tgl_mulai: '2024-05-21T05:24:00',
       tgl_selesai: '2024-05-22T05:24:00',
@@ -15,10 +16,10 @@ const dataPelatihan = [
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '2',
       nomor: '2',
-      nip: '19860926201500',
-      nama: 'Albert Eisten',
+      nip: '326753826',
+      nama: 'Eisten',
       kegiatan: 'Pelatihan Mengajar',
       tgl_mulai: '2024-05-21T05:24:00',
       tgl_selesai: '2024-05-22T05:24:00',
@@ -26,10 +27,10 @@ const dataPelatihan = [
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '3',
       nomor: '3',
-      nip: '19860926201500',
-      nama: 'Albert Eisten',
+      nip: '327657423',
+      nama: 'A. Eisten',
       kegiatan: 'Pelatihan Mengajar',
       tgl_mulai: '2024-05-21T05:24:00',
       tgl_selesai: '2024-05-22T05:24:00',
@@ -37,10 +38,10 @@ const dataPelatihan = [
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '4',
       nomor: '4',
-      nip: '19860926201500',
-      nama: 'Albert Eisten',
+      nip: '276563876534',
+      nama: 'anis',
       kegiatan: 'Pelatihan Mengajar',
       tgl_mulai: '2024-05-21T05:24:00',
       tgl_selesai: '2024-05-22T05:24:00',
@@ -48,10 +49,10 @@ const dataPelatihan = [
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '5',
       nomor: '5',
-      nip: '19860926201500',
-      nama: 'Albert Eisten',
+      nip: '222222222222',
+      nama: 'lela',
       kegiatan: 'Pelatihan Mengajar',
       tgl_mulai: '2024-05-21T05:24:00',
       tgl_selesai: '2024-05-22T05:24:00',
@@ -59,10 +60,10 @@ const dataPelatihan = [
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '6',
       nomor: '6',
-      nip: '19860926201500',
-      nama: 'Albert Eisten',
+      nip: '11111111111',
+      nama: 'laaa',
       kegiatan: 'Pelatihan Mengajar',
       tgl_mulai: '2024-05-21T05:24:00',
       tgl_selesai: '2024-05-22T05:24:00',
@@ -70,7 +71,7 @@ const dataPelatihan = [
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '7',
       nomor: '7',
       nip: '19860926201500',
       nama: 'Albert Eisten',
@@ -81,7 +82,7 @@ const dataPelatihan = [
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '8',
       nomor: '8',
       nip: '19860926201500',
       nama: 'Albert Eisten',
@@ -92,7 +93,7 @@ const dataPelatihan = [
       action: 'Detail'
   },
   {
-      id: '1',
+      id: '9',
       nomor: '9',
       nip: '19860926201500',
       nama: 'Albert Eisten',
@@ -104,8 +105,19 @@ const dataPelatihan = [
   }
 ]
 
-function HistoryPelatihan() {
-  const navigate = useNavigate()
+function HistoriPelatihan() {
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredPelatihan = dataPelatihan.filter((data) =>
+    data.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    data.nip.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
 
   return (
     <div>
@@ -117,6 +129,8 @@ function HistoryPelatihan() {
           type="text"
           placeholder="Search..."
           className="text-sm focus:outline-none active:outline-none bg-gray-200 border border-gray-200 w-full h-10 pl-11 pr-4 rounded-sm"
+          value={searchTerm}
+          onChange={handleSearchChange}
         />
       </div>
 
@@ -136,7 +150,7 @@ function HistoryPelatihan() {
             </thead>
 
             <tbody>
-              {dataPelatihan.map((pelatihan) => (
+              {filteredPelatihan.map((pelatihan) => (
               <tr key={pelatihan.id}>
                 <td className="p-1 pt-2">{pelatihan.nomor}</td>
                 <td>{pelatihan.nip}</td>
@@ -145,7 +159,7 @@ function HistoryPelatihan() {
                 <td>{new Date(pelatihan.tgl_mulai).toLocaleDateString()}</td>
                 <td>{new Date(pelatihan.tgl_selesai).toLocaleDateString()}</td>
                 <td className='font-semibold'>
-                  <button onClick={() => navigate('/AdminPage/detail_history_pelatihan')} className='flex justify-start items-center'>
+                  <button onClick={() => navigate('/AdminPage/detail_histori_pelatihan')} className='flex justify-start items-center'>
                     {pelatihan.action}
                     <HiChevronRight fontSize={18} className='ml-2' />
                   </button>
@@ -177,4 +191,4 @@ function HistoryPelatihan() {
 //   return <button className="bg-neutral-100 rounded-sm px-2.5 py-1 flex-1 border-none flex items-center text-xs font-semibold hover:bg-green-900 active:bg-green-900 focus:outline-none focus:bg focus:bg-green-900">{children}</button>
 // }
 
-export default HistoryPelatihan;
+export default HistoriPelatihan;

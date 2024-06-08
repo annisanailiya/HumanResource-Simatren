@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi'
 // import { HiChevronRight } from "react-icons/hi2";
 
@@ -13,47 +14,47 @@ const dataPresensi = [
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '2',
       nomor: '2',
-      nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nip: '4565734526526',
+      nama: 'Laela',
       tanggal: '2024-05-15T05:24:00',
       jam_masuk: '08.00',
       jam_keluar: '17.00',
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '3',
       nomor: '3',
-      nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nip: '465476354635',
+      nama: 'anis',
       tanggal: '2024-05-16T05:24:00',
       jam_masuk: '08.00',
       jam_keluar: '17.00',
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '4',
       nomor: '4',
-      nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nip: '111111111111',
+      nama: 'laaa',
       tanggal: '2024-05-17T05:24:00',
       jam_masuk: '08.00',
       jam_keluar: '17.00',
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '5',
       nomor: '5',
-      nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nip: '222222222',
+      nama: 'lae',
       tanggal: '2024-05-18T05:24:00',
       jam_masuk: '08.00',
       jam_keluar: '17.00',
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '6',
       nomor: '6',
       nip: '19860926201500',
       nama: 'Laela Anggraeni',
@@ -63,7 +64,7 @@ const dataPresensi = [
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '7',
       nomor: '7',
       nip: '19860926201500',
       nama: 'Laela Anggraeni',
@@ -73,7 +74,7 @@ const dataPresensi = [
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '8',
       nomor: '8',
       nip: '19860926201500',
       nama: 'Laela Anggraeni',
@@ -83,7 +84,7 @@ const dataPresensi = [
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '9',
       nomor: '9',
       nip: '19860926201500',
       nama: 'Laela Anggraeni',
@@ -94,7 +95,18 @@ const dataPresensi = [
   },
 ]
 
-function Presensi() {
+function HistoriPresensi() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredPresensi = dataPresensi.filter((data) =>
+    data.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    data.nip.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
       <p className="text-xl font-bold px-5">Data Presensi</p>
@@ -106,6 +118,8 @@ function Presensi() {
             type="text"
             placeholder="Search..."
             className="text-sm focus:outline-none active:outline-none bg-gray-200 border border-gray-200 w-full h-10 pl-11 pr-4 rounded-sm"
+            value={searchTerm}
+            onChange={handleSearchChange}
           />
         </div>
 
@@ -125,7 +139,7 @@ function Presensi() {
               </thead>
 
               <tbody>
-                {dataPresensi.map((presensi) => (
+                {filteredPresensi.map((presensi) => (
                 <tr key={presensi.id}>
                   <td className="p-1 pt-2">{presensi.nomor}</td>
                   <td>{presensi.nip}</td>
@@ -164,4 +178,4 @@ function Presensi() {
 //     )
 // }
 
-export default Presensi;
+export default HistoriPresensi;

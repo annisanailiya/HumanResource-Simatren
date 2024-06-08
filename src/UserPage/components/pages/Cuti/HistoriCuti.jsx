@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi'
 
 const dataCutiPegawai = [
@@ -11,7 +12,7 @@ const dataCutiPegawai = [
   {
     id: '2',
     nomor: '2',
-    tanggal_mulai: '2024-05-14T05:24:00',
+    tanggal_mulai: '2024-05-15T05:24:00',
     tanggal_selesai: '2024-05-14T05:24:00',
     alasan_cuti: 'Liburan'
 },
@@ -74,6 +75,15 @@ const dataCutiPegawai = [
 ]
 
 function HistoriCuti() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredCuti = dataCutiPegawai.filter((data) =>
+    data.tanggal_mulai.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <div>
       <p className="text-xl font-bold px-5">Histori Cuti</p>
@@ -84,6 +94,8 @@ function HistoriCuti() {
               type="text"
               placeholder="Search..."
               className="text-sm focus:outline-none active:outline-none bg-gray-200 border border-gray-200 w-full h-10 pl-11 pr-4 rounded-sm"
+              value={searchTerm}
+              onChange={handleSearchChange}
             />
           </div>
 
@@ -100,7 +112,7 @@ function HistoriCuti() {
             </thead>
 
             <tbody>
-              {dataCutiPegawai.map((cuti) => (
+              {filteredCuti.map((cuti) => (
                 <tr key={cuti.id}>
                   <td className="p-1 pt-2">{cuti.nomor}</td>
                   <td>{new Date(cuti.tanggal_mulai).toLocaleDateString()}</td>

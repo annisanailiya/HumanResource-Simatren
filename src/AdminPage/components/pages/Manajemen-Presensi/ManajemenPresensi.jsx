@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi'
 // import { HiChevronRight } from "react-icons/hi2";
 
@@ -5,75 +6,75 @@ const dataPresensi = [
   {
       id: '1',
       nomor: '1',
-      nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nip: '777777777777',
+      nama: 'annisa',
       tanggal: '2024-05-14T05:24:00',
       jam_masuk: '08.00',
       jam_keluar: '17.00',
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '2',
       nomor: '2',
-      nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nip: '8888888888',
+      nama: 'lela',
       tanggal: '2024-05-14T05:24:00',
       jam_masuk: '08.00',
       jam_keluar: '17.00',
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '3',
       nomor: '3',
-      nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nip: '735765656',
+      nama: 'nisa',
       tanggal: '2024-05-14T05:24:00',
       jam_masuk: '08.00',
       jam_keluar: '17.00',
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '4',
       nomor: '4',
-      nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nip: '5437645',
+      nama: 'laaaa',
       tanggal: '2024-05-14T05:24:00',
       jam_masuk: '08.00',
       jam_keluar: '17.00',
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '5',
       nomor: '5',
       nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nama: 'nay',
       tanggal: '2024-05-14T05:24:00',
       jam_masuk: '08.00',
       jam_keluar: '17.00',
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '6',
       nomor: '6',
       nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nama: 'annis',
       tanggal: '2024-05-14T05:24:00',
       jam_masuk: '08.00',
       jam_keluar: '17.00',
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '7',
       nomor: '7',
       nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nama: 'anis',
       tanggal: '2024-05-14T05:24:00',
       jam_masuk: '08.00',
       jam_keluar: '17.00',
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '8',
       nomor: '8',
       nip: '19860926201500',
       nama: 'Laela Anggraeni',
@@ -83,7 +84,7 @@ const dataPresensi = [
       total_jam: '9 jam'
   },
   {
-      id: '1',
+      id: '9',
       nomor: '9',
       nip: '19860926201500',
       nama: 'Laela Anggraeni',
@@ -95,6 +96,17 @@ const dataPresensi = [
 ]
 
 function ManajemenPresensi() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredPresensi = dataPresensi.filter((data) =>
+    data.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    data.nip.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
       <p className="text-xl font-bold px-5">Manajemen Presensi</p>
@@ -106,6 +118,8 @@ function ManajemenPresensi() {
             type="text"
             placeholder="Search..."
             className="text-sm focus:outline-none active:outline-none bg-gray-200 border border-gray-200 w-full h-10 pl-11 pr-4 rounded-sm"
+            value={searchTerm}
+            onChange={handleSearchChange}
           />
         </div>
 
@@ -125,7 +139,7 @@ function ManajemenPresensi() {
               </thead>
 
               <tbody>
-                {dataPresensi.map((presensi) => (
+                {filteredPresensi.map((presensi) => (
                 <tr key={presensi.id}>
                   <td className="p-1 pt-2">{presensi.nomor}</td>
                   <td>{presensi.nip}</td>

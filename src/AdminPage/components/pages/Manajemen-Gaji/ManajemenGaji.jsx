@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi'
 import { HiMiniPlus } from "react-icons/hi2";
 import { useNavigate } from 'react-router-dom';
@@ -15,9 +16,9 @@ const dataGajiPegawai = [
       total: 'Rp5000.000'
   },
   {
-      id: '1',
+      id: '2',
       nomor: '2',
-      nip: '19860926201500',
+      nip: '547654543',
       nama: 'Laela Anggraeni',
       gaji_dasar: 'Rp5000.000',
       tunjangan: 'Rp5000.000',
@@ -26,9 +27,9 @@ const dataGajiPegawai = [
       total: 'Rp5000.000'
   },
   {
-      id: '1',
+      id: '3',
       nomor: '3',
-      nip: '19860926201500',
+      nip: '65465765',
       nama: 'Laela Anggraeni',
       gaji_dasar: 'Rp5000.000',
       tunjangan: 'Rp5000.000',
@@ -37,9 +38,9 @@ const dataGajiPegawai = [
       total: 'Rp5000.000'
   },
   {
-      id: '1',
+      id: '4',
       nomor: '4',
-      nip: '19860926201500',
+      nip: '56576',
       nama: 'Laela Anggraeni',
       gaji_dasar: 'Rp5000.000',
       tunjangan: 'Rp5000.000',
@@ -48,9 +49,9 @@ const dataGajiPegawai = [
       total: 'Rp5000.000'
   },
   {
-      id: '1',
+      id: '5',
       nomor: '5',
-      nip: '19860926201500',
+      nip: '876587655',
       nama: 'Laela Anggraeni',
       gaji_dasar: 'Rp5000.000',
       tunjangan: 'Rp5000.000',
@@ -59,10 +60,10 @@ const dataGajiPegawai = [
       total: 'Rp5000.000'
   },
   {
-      id: '1',
+      id: '6',
       nomor: '6',
       nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nama: 'chani',
       gaji_dasar: 'Rp5000.000',
       tunjangan: 'Rp5000.000',
       potongan: 'Rp500.000',
@@ -70,10 +71,10 @@ const dataGajiPegawai = [
       total: 'Rp5000.000'
   },
   {
-      id: '1',
+      id: '7',
       nomor: '7',
       nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nama: 'do',
       gaji_dasar: 'Rp5000.000',
       tunjangan: 'Rp5000.000',
       potongan: 'Rp500.000',
@@ -81,10 +82,10 @@ const dataGajiPegawai = [
       total: 'Rp5000.000'
   },
   {
-      id: '1',
+      id: '8',
       nomor: '8',
       nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nama: 'pcy',
       gaji_dasar: 'Rp5000.000',
       tunjangan: 'Rp5000.000',
       potongan: 'Rp500.000',
@@ -92,10 +93,10 @@ const dataGajiPegawai = [
       total: 'Rp5000.000'
   },
   {
-      id: '1',
+      id: '9',
       nomor: '9',
-      nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nip: '6545646756',
+      nama: 'Jennie',
       gaji_dasar: 'Rp5000.000',
       tunjangan: 'Rp5000.000',
       potongan: 'Rp500.000',
@@ -103,10 +104,10 @@ const dataGajiPegawai = [
       total: 'Rp5000.000'
   },
   {
-      id: '1',
+      id: '10',
       nomor: '10',
       nip: '19860926201500',
-      nama: 'Laela Anggraeni',
+      nama: 'Lisa Anggraeni',
       gaji_dasar: 'Rp5000.000',
       tunjangan: 'Rp5000.000',
       potongan: 'Rp500.000',
@@ -116,7 +117,17 @@ const dataGajiPegawai = [
 ]
 
 function ManajemenGaji() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredGaji = dataGajiPegawai.filter((data) =>
+    data.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    data.nip.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
@@ -128,6 +139,8 @@ function ManajemenGaji() {
           type="text"
           placeholder="Search..."
           className="text-sm focus:outline-none active:outline-none bg-gray-200 border border-gray-200 w-2/3 h-10 pl-11 rounded-sm"
+          value={searchTerm}
+          onChange={handleSearchChange}
         />
       
         <div className='flex justify-between mx-2 md:mx-10'>
@@ -155,7 +168,7 @@ function ManajemenGaji() {
             </thead>
 
             <tbody>
-              {dataGajiPegawai.map((gaji) => (
+              {filteredGaji.map((gaji) => (
                 <tr key={gaji.id}>
                   <td className="p-1 pt-2">{gaji.nomor}</td>
                   <td>{gaji.nip}</td>

@@ -4,7 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { HiChevronDown, HiChevronRight } from "react-icons/hi";
 import { VscTools } from "react-icons/vsc";
 import { RiHistoryFill, RiCalendarScheduleLine } from "react-icons/ri";
-import { DASHBOARD_SIDEBAR_BOTTOM_LINKS, DASHBOARD_SIDEBAR_LINKS } from "./content/Navigation";
+import { DASHBOARD_SIDEBAR_BOTTOM_LINKS, DASHBOARD_SIDEBAR_KINERJA, DASHBOARD_SIDEBAR_LINKS } from "./content/Navigation";
 import { Link, useLocation } from "react-router-dom";
 import classNames from "classnames";
 
@@ -61,11 +61,14 @@ export default function Sidebar({ isOpen }) {
             </div>
           )}
         </div>
+        {DASHBOARD_SIDEBAR_KINERJA.map((item) => (
+          <SidebarLink key={item.key} item={item} />
+        ))}
       </div>
 
       <hr className="p-1 border-t border-green-700 mx-5"/>
   
-      <div className="flex-initial w-64 px-5">
+      <div className="flex-initial w-64 px-2">
         {DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((item) => (
           <SidebarLink key={item.key} item={item}/>
         ))}
