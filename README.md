@@ -9,7 +9,7 @@ TASK
 - masukkin jadwal pelatihan ✔✔
 - detail data pelatihan edit supaya bisa nampilin bukti pelatihan ✔✔ (gambar ambil dari db)
 - buat halaman kinerja admin & user ✔✔
-- buat halaman presensi user langsung ke kamera scanner✔
+- buat halaman presensi user langsung ke kamera scanner✔ (setelah scan qr, masuk kemana?)
 - hasil download data diubah ke pdf ✔✔
 - manajemen pegawai admin ditambah data keluarga dan BPJS ✔✔ (lengkapi lagi sesuai data karyawan)
 - data profil user disesuaikan dengan manajemen pegawai admin 
