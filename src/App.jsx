@@ -29,6 +29,7 @@ import PelaporanPelatihan from "./UserPage/components/pages/Pelatihan/PelaporanP
 import HistoriPelatihanUser from "./UserPage/components/pages/Pelatihan/HistoriPelatihanUser";
 import JadwalPelatihanUser from "./UserPage/components/pages/Pelatihan/JadwalPelatihanUser";
 import Kinerja from './UserPage/components/pages/Kinerja/Kinerja';
+import QrPresensi from './UserPage/components/pages/Presensi/QrPresensi';
 
 import { AuthProvider } from './Auth/AuthContext';
 import PrivateRoute from './Auth/PrivateRoute';
@@ -64,6 +65,7 @@ function App() {
           <Route path="/UserPage" element={<PrivateRoute allowedRoles={['user']}><LayoutUser /></PrivateRoute>}>
             <Route index element={<ProfilEdit />} />
             <Route path="/UserPage/histori_presensi" element={<HistoriPresensi />} />
+            <Route path="/UserPage/qr_presensi" element={<QrPresensi />} />
             <Route path="/UserPage/penggajian" element={<Penggajian />} />
             <Route path="/UserPage/pengajuan_cuti" element={<PengajuanCuti />} />
             <Route path="/UserPage/histori_cuti" element={<HistoriCuti />} />

@@ -149,7 +149,7 @@ function Penggajian() {
 
   return (
     <div>
-      <p className="text-xl font-bold px-5">Data Gaji</p>
+      <p className="text-xl font-bold mb-4 px-5">Data Gaji</p>
 
       <div>
         <div className="relative py-4 w-full justify-between flex flex-row">
