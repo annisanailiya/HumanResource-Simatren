@@ -9,6 +9,9 @@ const profilPegawai = [
     password: '12345678',
     ttl: 'Bandung, 23 Mei 2000',
     alamat: 'Jalan Telekomunikasi No.54, Deyeuhkolot',
+    status_perkawinan: 'Belum Menikah',
+    jumlah_tanggungan: '2',
+    status_bpjs: 'aktif',
   },
 ];
 
@@ -78,7 +81,7 @@ const ProfilEdit = () => {
                 <React.Fragment key={data.id}>
                   <tr>
                     <td>Nama Lengkap</td>
-                    <td className="p-2">:</td>
+                    <td className="p-3">:</td>
                     <td className="px-2 border border-gray-400 rounded-md">
                       <input
                         type="text"
@@ -151,6 +154,90 @@ const ProfilEdit = () => {
             </tbody>
           </table>
         </div>
+
+        <div className="flex-1">
+          <h1 className="flex px-6 pt-4 text-xs font-thin">INFORMASI KELUARGA</h1>
+          <table className='w-full border-separate px-10 py-3 text-gray-950 text-sm'>
+            <tbody>
+              {profil.map((data) => (
+                <React.Fragment key={data.id}>
+                  <tr>
+                    <td>Jumlah Tanggungan</td>
+                    <td className="p-3">:</td>
+                    <td className="px-2 border border-gray-400 rounded-md">
+                      <input
+                        type="number"
+                        name="jumlah_tanggungan"
+                        value={data.jumlah_tanggungan}
+                        readOnly={!isEditable}
+                        onChange={(e) => handleChange(e, data.id)}
+                        className={`w-full border-none bg-transparent focus:outline-none ${isEditable ? 'bg-white' : ''}`}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Status Perkawinan</td>
+                    <td className="p-2">:</td>
+                    <td className="px-2 border border-gray-400 rounded-md">
+                      <input
+                        type="text"
+                        name="status_perkawinan"
+                        value={data.status_perkawinan}
+                        readOnly={!isEditable}
+                        onChange={(e) => handleChange(e, data.id)}
+                        className={`w-full border-none bg-transparent focus:outline-none ${isEditable ? 'bg-white' : ''}`}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Status BPJS</td>
+                    <td className="p-2">:</td>
+                    <td className="px-2 border border-gray-400 rounded-md">
+                      <input
+                        type="text"
+                        name="status_bpjs"
+                        value={data.status_bpjs}
+                        readOnly={!isEditable}
+                        onChange={(e) => handleChange(e, data.id)}
+                        className={`w-full border-none bg-transparent focus:outline-none ${isEditable ? 'bg-white' : ''}`}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Tempat, Tanggal Lahir</td>
+                    <td className="p-2">:</td>
+                    <td className="px-2 border border-gray-400 rounded-md">
+                      <input
+                        type="text"
+                        name="ttl"
+                        value={data.ttl}
+                        readOnly={!isEditable}
+                        onChange={(e) => handleChange(e, data.id)}
+                        className={`w-full border-none bg-transparent focus:outline-none ${isEditable ? 'bg-white' : ''}`}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Alamat</td>
+                    <td className="p-2">:</td>
+                    <td className="px-2 border border-gray-400 rounded-md">
+                      <input
+                        type="text"
+                        name="alamat"
+                        value={data.alamat}
+                        readOnly={!isEditable}
+                        onChange={(e) => handleChange(e, data.id)}
+                        className={`w-full border-none bg-transparent focus:outline-none ${isEditable ? 'bg-white' : ''}`}
+                      />
+                    </td>
+                  </tr>
+                </React.Fragment>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        
       </div>
     </div>
   )

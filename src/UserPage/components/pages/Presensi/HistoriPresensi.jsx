@@ -1,105 +1,20 @@
+// HistoriPresensi.jsx
 import { useState } from 'react';
-import { HiOutlineSearch } from 'react-icons/hi'
-// import { HiChevronRight } from "react-icons/hi2";
-
-const dataPresensi = [
-  {
-      id: '1',
-      nomor: '1',
-      nip: '19860926201500',
-      nama: 'Laela Anggraeni',
-      tanggal: '2024-05-14T05:24:00',
-      jam_masuk: '08.00',
-      jam_keluar: '17.00',
-      total_jam: '9 jam'
-  },
-  {
-      id: '2',
-      nomor: '2',
-      nip: '4565734526526',
-      nama: 'Laela',
-      tanggal: '2024-05-15T05:24:00',
-      jam_masuk: '08.00',
-      jam_keluar: '17.00',
-      total_jam: '9 jam'
-  },
-  {
-      id: '3',
-      nomor: '3',
-      nip: '465476354635',
-      nama: 'anis',
-      tanggal: '2024-05-16T05:24:00',
-      jam_masuk: '08.00',
-      jam_keluar: '17.00',
-      total_jam: '9 jam'
-  },
-  {
-      id: '4',
-      nomor: '4',
-      nip: '111111111111',
-      nama: 'laaa',
-      tanggal: '2024-05-17T05:24:00',
-      jam_masuk: '08.00',
-      jam_keluar: '17.00',
-      total_jam: '9 jam'
-  },
-  {
-      id: '5',
-      nomor: '5',
-      nip: '222222222',
-      nama: 'lae',
-      tanggal: '2024-05-18T05:24:00',
-      jam_masuk: '08.00',
-      jam_keluar: '17.00',
-      total_jam: '9 jam'
-  },
-  {
-      id: '6',
-      nomor: '6',
-      nip: '19860926201500',
-      nama: 'Laela Anggraeni',
-      tanggal: '2024-05-19T05:24:00',
-      jam_masuk: '08.00',
-      jam_keluar: '17.00',
-      total_jam: '9 jam'
-  },
-  {
-      id: '7',
-      nomor: '7',
-      nip: '19860926201500',
-      nama: 'Laela Anggraeni',
-      tanggal: '2024-05-20T05:24:00',
-      jam_masuk: '08.00',
-      jam_keluar: '17.00',
-      total_jam: '9 jam'
-  },
-  {
-      id: '8',
-      nomor: '8',
-      nip: '19860926201500',
-      nama: 'Laela Anggraeni',
-      tanggal: '2024-05-21T05:24:00',
-      jam_masuk: '08.00',
-      jam_keluar: '17.00',
-      total_jam: '9 jam'
-  },
-  {
-      id: '9',
-      nomor: '9',
-      nip: '19860926201500',
-      nama: 'Laela Anggraeni',
-      tanggal: '2024-05-22T05:24:00',
-      jam_masuk: '08.00',
-      jam_keluar: '17.00',
-      total_jam: '9 jam'
-  },
-]
+import { HiOutlineSearch } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
+import { usePresensi } from './PresensiContext';
 
 function HistoriPresensi() {
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const { dataPresensi } = usePresensi();
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleLengkapiPresensi = (id) => {
+    navigate(`/UserPage/form_presensi/${id}`);
   };
 
   const filteredPresensi = dataPresensi.filter((data) =>
@@ -135,47 +50,47 @@ function HistoriPresensi() {
                   <td className='font-bold py-4'>Jam Masuk</td>
                   <td className='font-bold py-4'>Jam Keluar</td>
                   <td className='font-bold py-4'>Total Jam Kerja</td>
+                  <td></td>
                 </tr>
               </thead>
 
               <tbody>
-                {filteredPresensi.map((presensi) => (
-                <tr key={presensi.id}>
-                  <td className="p-1 pt-2">{presensi.nomor}</td>
-                  <td>{presensi.nip}</td>
-                  <td>{presensi.nama}</td>
-                  <td>{new Date(presensi.tanggal).toLocaleDateString()}</td>
-                  <td>{presensi.jam_masuk}</td>
-                  <td>{presensi.jam_keluar}</td>
-                  <td>{presensi.total_jam}</td>
-                </tr>
-                ))}
+                {filteredPresensi.map((presensi) => {
+                  const isSameDay = new Date(presensi.tanggal).toDateString() === new Date().toDateString();
+                  const isComplete = presensi.jam_masuk && presensi.jam_keluar;
+
+                  return (
+                    <tr key={presensi.id}>
+                      <td className="p-1 pt-2">{presensi.nomor}</td>
+                      <td>{presensi.nip}</td>
+                      <td>{presensi.nama}</td>
+                      <td>{new Date(presensi.tanggal).toLocaleDateString()}</td>
+                      <td>{presensi.jam_masuk}</td>
+                      <td>{presensi.jam_keluar}</td>
+                      <td>
+                        {isComplete ? (
+                          <span>{presensi.total_jam}</span>
+                        ) : (
+                          isSameDay && presensi.jam_masuk && !presensi.jam_keluar && (
+                            <button
+                              onClick={() => handleLengkapiPresensi(presensi.id)}
+                              className="text-green-900 underline p-1 text-center"
+                            >
+                              Lengkapi Presensi
+                            </button>
+                          )
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
         </div>
-
-            {/* <div className='py-2 justify-end flex flex-row items-center'>
-                <button><HiChevronLeft fontSize={18} className='mr-2' /></button>
-                <div className='flex gap-4'>
-                    <BoxWrapper>1</BoxWrapper>
-                    <BoxWrapper>2</BoxWrapper>
-                    <BoxWrapper>..</BoxWrapper>
-                    <BoxWrapper>8</BoxWrapper>
-                </div>
-                <button><HiChevronRight fontSize={18} className='ml-2' /></button>
-
-            </div> */}
       </div>
     </div>
-  )
+  );
 }
-
-// eslint-disable-next-line react/prop-types
-// function BoxWrapper({ children }) {
-//     return (
-//     <button className="bg-neutral-100 rounded-sm px-2.5 py-1 flex-1 border-none flex items-center text-xs font-semibold hover:bg-green-900 active:bg-green-900 focus:outline-none focus:bg focus:bg-green-900">{children}</button>
-//     )
-// }
 
 export default HistoriPresensi;

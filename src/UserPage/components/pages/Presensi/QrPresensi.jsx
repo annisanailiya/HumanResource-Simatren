@@ -1,17 +1,30 @@
 import React from 'react';
 import QrScanner from 'react-qr-scanner';
+import { useNavigate } from 'react-router-dom';
 
 const QrPresensi = () => {
+  const navigate = useNavigate();
+  
   const handleScan = (data) => {
     if (data) {
       try {
         const url = new URL(data.text || data);
-        window.location.href = url.href;
+        // Simpan data presensi ke dalam state atau konteks aplikasi di sini
+        const timestamp = new Date().toLocaleString(); // Atau gunakan timestamp dari QR jika tersedia
+        const presensiData = {
+          url: url.href,
+          timestamp: timestamp,
+          // Data tambahan seperti ID pegawai, dll.
+        };
+        // Lakukan penyimpanan data presensi disini, contoh: dispatch ke konteks aplikasi
+        // Setelah itu, navigasikan pengguna ke halaman histori
+        navigate(`/UserPage/histori_presensi`, { state: { presensiData } });
       } catch (err) {
         console.error('URL yang dipindai tidak valid', err);
       }
     }
   };
+  
 
   const handleError = (err) => {
     console.error(err);

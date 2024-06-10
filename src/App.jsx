@@ -30,6 +30,8 @@ import HistoriPelatihanUser from "./UserPage/components/pages/Pelatihan/HistoriP
 import JadwalPelatihanUser from "./UserPage/components/pages/Pelatihan/JadwalPelatihanUser";
 import Kinerja from './UserPage/components/pages/Kinerja/Kinerja';
 import QrPresensi from './UserPage/components/pages/Presensi/QrPresensi';
+import FormPresensi from './UserPage/components/pages/Presensi/FormPresensi';
+import { PresensiProvider } from './UserPage/components/pages/Presensi/PresensiContext';
 
 import { AuthProvider } from './Auth/AuthContext';
 import PrivateRoute from './Auth/PrivateRoute';
@@ -37,6 +39,7 @@ import PrivateRoute from './Auth/PrivateRoute';
 function App() {
   return (
     <AuthProvider>
+      <PresensiProvider>
       <Router>
         <Routes>
           {/* Public Routes */}
@@ -64,7 +67,10 @@ function App() {
           {/* User Page */}
           <Route path="/UserPage" element={<PrivateRoute allowedRoles={['user']}><LayoutUser /></PrivateRoute>}>
             <Route index element={<ProfilEdit />} />
+            
             <Route path="/UserPage/histori_presensi" element={<HistoriPresensi />} />
+            <Route path="/UserPage/form_presensi/:id" element={<FormPresensi />} />
+            
             <Route path="/UserPage/qr_presensi" element={<QrPresensi />} />
             <Route path="/UserPage/penggajian" element={<Penggajian />} />
             <Route path="/UserPage/pengajuan_cuti" element={<PengajuanCuti />} />
@@ -78,6 +84,7 @@ function App() {
           <Route path="logout" element={<LoginPage />} />
         </Routes>
       </Router>
+      </PresensiProvider>
     </AuthProvider>
   );
 }
