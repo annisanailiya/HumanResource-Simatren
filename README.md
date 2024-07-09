@@ -59,7 +59,7 @@ Admin
 
 Dashboard => 
 - pegawai aktif, presensi, pegawai cuti => filtered by date jadi harus ada kolom tanggal_presensi di semua table terkait(cuti, data_presensi), kalo data pegawai aktif tinggal menyesuaikan data cuti jadi jumlahnya tinggal dikurangi sama data cuti per tanggal_cuti nya✅
-- grafik presensi => data cuti berdasarkan tanggal jadi bisa dibuat grafik sedangkan data cuti belom ada, data cuti didapat dari user upload -> admin acc -> dan data masuk ke database
+- grafik presensi => data cuti berdasarkan tanggal jadi bisa dibuat grafik sedangkan data cuti belom ada, data cuti didapat dari user upload -> admin acc -> dan data masuk ke database✅
 - grafik pelatihan => seharusnya ngambil jumlah pelatihan berdasarkan bulan dan dalam Waktu 6 bulan✅
 - grafik kinerja?
 
