@@ -150,7 +150,7 @@ router.put('/pegawai/profil/:id_pegawai', upload.single('foto_profil'), (req, re
     if (req.file) {
         foto_profil = req.file.buffer.toString('base64');
     }
-    
+
     const getFotoProfilSql = `SELECT foto_profil FROM data_pegawai WHERE id_pegawai = ?`;
     db.query(getFotoProfilSql, [id_pegawai], (err, result) => {
         if (err) {
@@ -187,7 +187,13 @@ router.put('/pegawai/profil/:id_pegawai', upload.single('foto_profil'), (req, re
                         console.error('Error executing query:', err);
                         res.status(500).json({ error: 'Internal server error' });
                     } else {
-                        res.json({ message: 'Pegawai updated successfully' });
+                        res.json({ 
+                            message: 'Pegawai updated successfully',
+                            foto_profil: {
+                                data: finalFotoProfil,
+                                type: req.file ? req.file.mimetype.split('/')[1] : 'jpeg' 
+                            }
+                        });
                     }
                 });
             } else {
@@ -196,6 +202,5 @@ router.put('/pegawai/profil/:id_pegawai', upload.single('foto_profil'), (req, re
         }
     });
 });
-
 
 export default router;
