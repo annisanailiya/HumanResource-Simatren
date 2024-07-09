@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { HiOutlineSearch } from 'react-icons/hi';
+import { HiOutlineSearch, HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 import { HiMiniPlus } from "react-icons/hi2";
-import { HiChevronRight } from "react-icons/hi2";
-import { getPegawaiStatus } from '../../utils/status';
 import { useNavigate } from 'react-router-dom';
-import moment from 'moment-timezone';
+import { getPegawaiStatus } from "../../utils/status";
 
 function JadwalPelatihan() {
   const [dataPelatihan, setDataPelatihan] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10; // Jumlah item per halaman
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,14 +16,11 @@ function JadwalPelatihan() {
 
   const fetchDataPelatihan = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/jadwal_pelatihan/jadwalpelatihan');
+      const response = await fetch('http://localhost:5000/api/data_pelatihan/pelatihan');
       const data = await response.json();
-      const formattedData = data.map(item => ({
-        ...item,
-        tanggal_mulai: moment.utc(item.tanggal_mulai).tz('Asia/Jakarta').format('DD/MM/YYYY'),
-        tanggal_selesai: moment.utc(item.tanggal_selesai).tz('Asia/Jakarta').format('DD/MM/YYYY'),
-      }));
-      setDataPelatihan(formattedData);
+      // Filter data dengan status "Belum Dimulai" dan "Proses"
+      const filteredData = data.filter(item => item.status === 'Belum Dimulai' || item.status === 'Proses');
+      setDataPelatihan(filteredData);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -37,7 +34,30 @@ function JadwalPelatihan() {
 
   const filteredPelatihan = dataPelatihan.filter((data) =>
     data.nama_kegiatan.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    data.status.toLowerCase().includes(searchTerm.toLowerCase())
+    data.nama_pegawai.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Membagi data ke halaman-halaman
+  const totalPages = Math.ceil(filteredPelatihan.length / itemsPerPage);
+  const currentPageData = filteredPelatihan.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  // Fungsi untuk navigasi halaman
+  const goToPreviousPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const BoxWrapper = ({ children, isActive, onClick }) => (
+    <button
+      className={`rounded-sm px-2.5 py-1 flex-1 border-none flex items-center text-xs font-semibold ${isActive ? 'bg-green-900 text-white' : 'hover:bg-green-900'
+        }`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
   );
 
   return (
@@ -68,24 +88,28 @@ function JadwalPelatihan() {
             <thead className="sticky top-0 bg-white">
               <tr className="border-b-[1.5px]">
                 <td className='font-bold py-4'>No.</td>
+                <td className='font-bold py-4'>NIP</td>
+                <td className='font-bold py-4'>Nama Pegawai</td>
+                <td className='font-bold py-4'>Penyelenggara</td>
                 <td className='font-bold py-4'>Nama Kegiatan</td>
-                <td className='font-bold py-4'>Tanggal Mulai</td>
                 <td className='font-bold py-4'>Status</td>
                 <td className='font-bold py-4'>Action</td>
               </tr>
             </thead>
 
             <tbody>
-              {filteredPelatihan.map((data, index) => (
+              {currentPageData.map((data, index) => (
                 <tr key={index}>
-                  <td className="p-1 pt-2">{index + 1}</td>
+                  <td className="p-1 pt-2">{(currentPage - 1) * itemsPerPage + index + 1}</td>
+                  <td>{data.nip}</td>
+                  <td>{data.nama_pegawai}</td>
+                  <td>{data.nama_penyelenggara}</td>
                   <td>{data.nama_kegiatan}</td>
-                  <td>{data.tanggal_mulai}</td>
                   <td>{getPegawaiStatus(data.status)}</td>
                   <td className='font-semibold'>
                     <button onClick={() => navigate(`/AdminPage/detail_jadwal_pelatihan/${data.id_pelatihan}`)} className='flex justify-start items-center'>
                       Detail
-                      <HiChevronRight fontSize={18} className='ml-2' />
+                      <HiChevronRight fontSize={18} className='ml-1' />
                     </button>
                   </td>
                 </tr>
@@ -95,24 +119,24 @@ function JadwalPelatihan() {
         </div>
       </div>
 
-      {/* <div className='py-2 justify-end flex flex-row items-center'>
-        <button><HiChevronLeft fontSize={18} className='mr-2' /></button>
-          <div className='flex gap-4'>
-            <BoxWrapper>1</BoxWrapper>
-            <BoxWrapper>2</BoxWrapper>
-            <BoxWrapper>..</BoxWrapper>
-            <BoxWrapper>8</BoxWrapper>
-          </div>
-        <button><HiChevronRight fontSize={18} className='ml-2' /></button>
-      </div> */}
-
+      {/* Navigasi Halaman */}
+      <div className='py-2 justify-end flex flex-row items-center'>
+        <button onClick={goToPreviousPage} disabled={currentPage === 1}><HiChevronLeft fontSize={18} className='mr-2' /></button>
+        <div className='flex gap-4'>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <BoxWrapper
+              key={index}
+              isActive={currentPage === index + 1}
+              onClick={() => setCurrentPage(index + 1)}
+            >
+              {index + 1}
+            </BoxWrapper>
+          ))}
+        </div>
+        <button onClick={goToNextPage} disabled={currentPage === totalPages}><HiChevronRight fontSize={18} className='ml-2' /></button>
+      </div>
     </div>
-  )
+  );
 }
 
-// eslint-disable-next-line react/prop-types
-// function BoxWrapper({ children }) {
-//   return <button className="bg-neutral-100 rounded-sm px-2.5 py-1 flex-1 border-none flex items-center text-xs font-semibold hover:bg-green-900 active:bg-green-900 focus:outline-none focus:bg focus:bg-green-900">{children}</button>
-// }
-
-export default JadwalPelatihan
+export default JadwalPelatihan;
