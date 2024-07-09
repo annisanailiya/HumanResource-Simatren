@@ -9,11 +9,12 @@ ProfilEdit
 Histori Presensi 
 - tab table✅
 - data ambil dari database berdasarkan ID✅
-- data ambil dari post QR
+- data ambil dari post QR (pb:link qr???)
 - perhitungan total jam kerja✅
 
-Scan QR 
+Scan QR (pb:link qr???)
 - masuk dan keluar dibedain✅
+- waktu disable diatur
 - data masuk ke database
 - dapat menangkap gps user Ketika akan scan
 - scan hanya bisa dilakukan di ponpes sesuai dengan shift
@@ -27,9 +28,9 @@ cuti
 - status awal => proses✅
 - admin menyetujui => status berubah jadi => Disetujui✅
 - admin menolak => status berubah jadi => Ditolak✅
-- button lihat histori => typo dan ganggu penempatannya
+- button lihat histori => typo dan ganggu penempatannya✅
 - tab table✅
-- hubungin sama status data pegawai biar bisa masuk dashboard
+- hubungin sama status data pegawai biar bisa masuk dashboard✅
 
 pelatihan
 - masukkan nama kegiatan
@@ -55,7 +56,7 @@ Admin
 - tab table✅
 
 Dashboard => 
-- pegawai aktif, presensi, pegawai cuti => filtered by date jadi harus ada kolom tanggal_presensi di semua table terkait(cuti, data_presensi), kalo data pegawai aktif tinggal menyesuaikan data cuti jadi jumlahnya tinggal dikurangi sama data cuti per tanggal_cuti nya
+- pegawai aktif, presensi, pegawai cuti => filtered by date jadi harus ada kolom tanggal_presensi di semua table terkait(cuti, data_presensi), kalo data pegawai aktif tinggal menyesuaikan data cuti jadi jumlahnya tinggal dikurangi sama data cuti per tanggal_cuti nya✅
 - grafik presensi => data cuti berdasarkan tanggal jadi bisa dibuat grafik sedangkan data cuti belom ada, data cuti didapat dari user upload -> admin acc -> dan data masuk ke database
 - grafik pelatihan => seharusnya ngambil jumlah pelatihan berdasarkan bulan dan dalam Waktu 6 bulan✅
 - grafik kinerja?
@@ -71,7 +72,7 @@ Manajemen Pegawai => tambah_data
 - data keluarga => tambahin example : jook,koko,lolo✅
 - nomor pon ditambah pegawai, nomor induk huruf masih bisa harusnya ga bisa✅
 - roll nya ganti dropdown✅
-- bagaimana cara mengubah status pegawai?
+- bagaimana cara mengubah status pegawai?✅
 => setelah cuti di acc otomatis status pegawai menjadi tidak aktif sesuai tanggalnya,
 
 => detail
