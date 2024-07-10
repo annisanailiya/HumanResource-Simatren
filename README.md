@@ -1,4 +1,15 @@
 button pojok kanan benerin semua kayak yg di lihat histori cuti user
+Admin
+- manajemen pegawai => tambah pegawai✅
+- manajemen gaji => tambah data gaji
+- manajemen cuti => histori cuti
+- manajemen pelatihan => jadwal pelatihan => atur jadwal
+
+User
+- Profil => edit
+- penggajian => pilih download & download all (download semua)
+- pelatihan => lihat jadwal & lihat histori
+- 
 
 User
 
