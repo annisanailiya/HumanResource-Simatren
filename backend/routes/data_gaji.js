@@ -21,8 +21,6 @@ router.get('/gaji', (req, res) => {
         data_gaji g
     JOIN 
         data_pegawai p ON g.id_pegawai = p.id_pegawai
-    ORDER BY 
-        p.nama_pegawai ASC
     `;
     db.query(query, (err, results) => {
         if (err) {
