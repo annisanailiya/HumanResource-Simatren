@@ -184,15 +184,19 @@ const TambahDataPegawai = () => {
                 <span className='text-gray-900 text-sm font-medium'>Posisi</span>
                 <span className='text-red-700'>*</span>
               </div>
-              <input
+              <select
                 type="text"
                 name="role"
                 value={formData.role}
                 onChange={handleInputChange}
-                placeholder="Masukkan posisi"
-                className="text-sm focus:outline-gray-400 active:outline-gray-400 border border-gray-300 w-full h-10 pl-2 rounded-md"
+                className={`text-sm focus:outline-gray-400 active:outline-gray-400 border border-gray-300 w-full h-10 pl-2 rounded-md ${formData.role ? 'text-black' : 'text-gray-400'}`}
                 required
-              />
+              >
+                <option value="" disabled hidden>Pilih posisi</option>
+                <option value="Guru" className='text-black'>Guru</option>
+                <option value="TPA" className='text-black'>TPA</option>
+                <option value="Non TPA" className='text-black'>Non TPA</option>
+              </select>
             </div>
             <div>
               <div className='flex flex-row'>
