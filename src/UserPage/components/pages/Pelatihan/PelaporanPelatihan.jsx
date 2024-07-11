@@ -76,7 +76,6 @@ const PelaporanPelatihan = () => {
     } catch (error) {
       console.error('Error uploading bukti pelaksanaan:', error);
     }
-
     // Reset form setelah submit
     setSelectedPelatihan('');
     setNamaPenyelenggara('');

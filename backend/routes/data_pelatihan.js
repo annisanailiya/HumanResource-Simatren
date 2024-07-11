@@ -155,13 +155,26 @@ router.post('/pelatihan', (req, res) => {
     const status = 'Belum Dimulai';
     const query = `INSERT INTO data_pelatihan (id_pegawai, nama_penyelenggara, nama_kegiatan, tanggal_mulai, tanggal_selesai, deskripsi_kegiatan, status) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-    db.query(query, [id_pegawai, nama_penyelenggara, nama_kegiatan, tanggal_mulai, tanggal_selesai, deskripsi_kegiatan, status], (err, result) => {
-        if (err) {
-            console.error('Error inserting data:', err);
-            return res.status(500).json({ error: 'Internal server error' });
-        }
-        res.status(201).json({ message: 'Jadwal Pelatihan created successfully', id_pelatihan: result.insertId });
+    let promises = id_pegawai.map(id => {
+        return new Promise((resolve, reject) => {
+            db.query(query, [id, nama_penyelenggara, nama_kegiatan, tanggal_mulai, tanggal_selesai, deskripsi_kegiatan, status], (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
     });
+
+    Promise.all(promises)
+        .then(results => {
+            res.status(201).json({ message: 'Jadwal Pelatihan created successfully', results });
+        })
+        .catch(err => {
+            console.error('Error inserting data:', err);
+            res.status(500).json({ error: 'Internal server error' });
+        });
 });
 
 //Mengedit Jadwal Pelatihan
