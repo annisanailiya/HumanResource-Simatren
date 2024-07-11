@@ -1,13 +1,16 @@
 import express from 'express';
 import db from '../db.js';
 import multer from 'multer';
+import bcrypt from 'bcryptjs';
 
 const router = express.Router();
 
+// Konfigurasi multer untuk menyimpan file foto profil
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 //ADMIN
+//Menambah data pegawai
 router.post('/pegawai', (req, res) => {
     const { nama_pegawai, nip, tempat_lahir, tanggal_lahir, jenis_kelamin, alamat, no_telp, email, password, role, status_bpjs, status_kawin, anggota_keluarga, jumlah_tanggungan } = req.body;
     const status_kepegawaian = 'Aktif'; // Default status kepegawaian "Aktif"
@@ -26,6 +29,7 @@ router.post('/pegawai', (req, res) => {
     });
 });
 
+//Menampilkan seluruh data pegawai
 router.get('/pegawai', (req, res) => {
     console.log("GET /api/data_pegawai/pegawai");
     const query = 'SELECT * FROM data_pegawai';
@@ -39,6 +43,7 @@ router.get('/pegawai', (req, res) => {
     });
 });
 
+//Menampilkan detail setiap pegawai
 router.get('/pegawai/:id_pegawai', (req, res) => {
     const { id_pegawai } = req.params;
     const sql = `SELECT * FROM data_pegawai WHERE id_pegawai = ?`;
@@ -68,6 +73,7 @@ router.get('/pegawai/:id_pegawai', (req, res) => {
     });
 });
 
+//Menghapus data pegawai 
 router.delete('/pegawai/:id_pegawai', (req, res) => {
     const { id_pegawai } = req.params;
     const sql = 'DELETE FROM data_pegawai WHERE id_pegawai = ?';
@@ -81,6 +87,7 @@ router.delete('/pegawai/:id_pegawai', (req, res) => {
     });
 });
 
+//Mengedit data pegawai
 router.put('/pegawai/:id_pegawai', (req, res) => {
     const { id_pegawai } = req.params;
     const { nama_pegawai, nip, tempat_lahir, tanggal_lahir, jenis_kelamin, alamat, no_telp, email, role, status_bpjs, status_kepegawaian, anggota_keluarga, jumlah_tanggungan } = req.body;
@@ -114,6 +121,7 @@ router.put('/pegawai/:id_pegawai', (req, res) => {
 });
 
 //USER
+//Menampilkan data pegawai sesuai id pegawai yang sedang login
 router.get('/pegawai/profil/:id_pegawai', (req, res) => {
     const { id_pegawai } = req.params;
     const sql = `SELECT * FROM data_pegawai WHERE id_pegawai = ?`;
@@ -143,63 +151,75 @@ router.get('/pegawai/profil/:id_pegawai', (req, res) => {
     });
 });
 
-router.put('/pegawai/profil/:id_pegawai', upload.single('foto_profil'), (req, res) => {
+// Mengupload foto profil
+router.post('/pegawai/upload-foto/:id_pegawai', upload.single('foto_profil'), (req, res) => {
     const { id_pegawai } = req.params;
-    const { nama_pegawai, nip, tempat_lahir, tanggal_lahir, jenis_kelamin, alamat, no_telp, email, password, role, status_bpjs, status_kepegawaian, anggota_keluarga, jumlah_tanggungan } = req.body;
-    let foto_profil = null;
-    if (req.file) {
-        foto_profil = req.file.buffer.toString('base64');
+    const file = req.file;
+
+    if (!file) {
+        return res.status(400).json({ message: 'No file uploaded' });
     }
 
-    const getFotoProfilSql = `SELECT foto_profil FROM data_pegawai WHERE id_pegawai = ?`;
-    db.query(getFotoProfilSql, [id_pegawai], (err, result) => {
+    const fileBuffer = file.buffer;
+
+    const query = 'UPDATE data_pegawai SET foto_profil = ? WHERE id_pegawai = ?';
+    db.query(query, [fileBuffer, id_pegawai], (err, result) => {
+        if (err) {
+            console.error('Error uploading file to the database:', err);
+            return res.status(500).json({ message: 'Error uploading file' });
+        }
+        res.status(200).json({ message: 'Photo Profile uploaded successfully' });
+    });
+});
+
+//Mengedit profil pegawai
+router.put('/pegawai/profil/:id_pegawai', async (req, res) => {
+    const { id_pegawai } = req.params;
+    const { nama_pegawai, nip, tempat_lahir, tanggal_lahir, jenis_kelamin, alamat, no_telp, email, password, role, status_bpjs, status_kepegawaian, anggota_keluarga, jumlah_tanggungan } = req.body;
+
+    // Mengambil password lama dari database
+    const sqlSelect = `SELECT password FROM data_pegawai WHERE id_pegawai = ?`;
+    db.query(sqlSelect, [id_pegawai], async (err, result) => {
         if (err) {
             console.error('Error executing query:', err);
-            res.status(500).json({ error: 'Internal server error' });
-        } else {
-            if (result.length > 0) {
-                const existingFotoProfil = result[0].foto_profil;
-                const finalFotoProfil = foto_profil || existingFotoProfil;
-
-                const sql = `
-                    UPDATE data_pegawai
-                    SET
-                        nama_pegawai = ?,
-                        nip = ?,
-                        tempat_lahir = ?,
-                        tanggal_lahir = ?,
-                        jenis_kelamin = ?,
-                        alamat = ?,
-                        no_telp = ?,
-                        email = ?,
-                        password = ?,
-                        role =  ?,
-                        status_bpjs = ?,
-                        status_kepegawaian = ?,
-                        anggota_keluarga = ?,
-                        jumlah_tanggungan = ?,
-                        foto_profil = ?
-                    WHERE id_pegawai = ?
-                `;
-                const values = [nama_pegawai, nip, tempat_lahir, tanggal_lahir, jenis_kelamin, alamat, no_telp, email, password, role, status_bpjs, status_kepegawaian, anggota_keluarga, jumlah_tanggungan, finalFotoProfil, id_pegawai];
-                db.query(sql, values, (err, result) => {
-                    if (err) {
-                        console.error('Error executing query:', err);
-                        res.status(500).json({ error: 'Internal server error' });
-                    } else {
-                        res.json({ 
-                            message: 'Pegawai updated successfully',
-                            foto_profil: {
-                                data: finalFotoProfil,
-                                type: req.file ? req.file.mimetype.split('/')[1] : 'jpeg' 
-                            }
-                        });
-                    }
-                });
-            } else {
-                res.status(404).json({ error: 'Profil Pegawai not found' });
-            }
+            return res.status(500).json({ error: 'Internal server error' });
         }
+
+        let hashedPassword = result[0].password;
+        if (password && password !== '') {
+            const salt = await bcrypt.genSalt(10);
+            hashedPassword = await bcrypt.hash(password, salt);
+        }
+
+        const sqlUpdate = `
+            UPDATE data_pegawai
+            SET
+                nama_pegawai = ?,
+                nip = ?,
+                tempat_lahir = ?,
+                tanggal_lahir = ?,
+                jenis_kelamin = ?,
+                alamat = ?,
+                no_telp = ?,
+                email = ?,
+                password = ?,
+                role = ?,
+                status_bpjs = ?,
+                status_kepegawaian = ?,
+                anggota_keluarga = ?,
+                jumlah_tanggungan = ?
+            WHERE id_pegawai = ?
+        `;
+        const values = [nama_pegawai, nip, tempat_lahir, tanggal_lahir, jenis_kelamin, alamat, no_telp, email, hashedPassword, role, status_bpjs, status_kepegawaian, anggota_keluarga, jumlah_tanggungan, id_pegawai];
+
+        db.query(sqlUpdate, values, (err, result) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                return res.status(500).json({ error: 'Internal server error' });
+            } else {
+                return res.json({ message: 'Pegawai updated successfully' });
+            }
+        });
     });
 });
 

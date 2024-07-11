@@ -35,7 +35,6 @@ import Kinerja from './UserPage/components/pages/Kinerja/Kinerja';
 import { AuthProvider } from './AuthContext';
 import PrivateRoute from './PrivateRoute';
 
-
 function App() {
   return (
     <AuthProvider>

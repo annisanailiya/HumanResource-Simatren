@@ -11,7 +11,6 @@ import classNames from "classnames";
 import { useAuth } from "../../AuthContext";
 import axios from 'axios';
 
-
 const linkClasses = "flex items-center gap-3 font-semibold px-4 py-3 hover:scale-95 hover:bg-[#98FB98] hover:text-green-900 hover:no-underline active:bg-[#98FB98] rounded-md text-sm";
 
 // eslint-disable-next-line react/prop-types
