@@ -145,7 +145,7 @@ const ProfilEdit = () => {
 
     return (
         <div>
-            <div className="relative py-4 w-fit md:w-full justify-between flex flex-row">
+            <div className="relative py-4 flex items-center justify-between w-full">
                 <p className="text-xl font-bold mb-4 px-5">Profil</p>
 
                 <div className="absolute right-4">
@@ -238,11 +238,9 @@ const ProfilEdit = () => {
                                             className={`w-full border-none bg-transparent focus:outline-none ${isEditable ? 'bg-white' : ''}`}
                                         />
                                         {/* Icon mata untuk melihat/sembunyikan password */}
-                                        {isEditable && (
                                             <div className="absolute right-2 top-2 cursor-pointer" onClick={toggleShowPassword}>
                                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
                                             </div>
-                                        )}
                                     </td>
                                 </tr>
                             )}
