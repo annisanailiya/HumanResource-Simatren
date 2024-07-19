@@ -1,6 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaUserCircle, FaEye, FaEyeSlash } from "react-icons/fa";
 import { FaCirclePlus } from "react-icons/fa6";
+import { TbUpload } from "react-icons/tb";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
 import axios from 'axios';
 import moment from 'moment-timezone';
 
@@ -11,7 +14,9 @@ const ProfilEdit = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [originalPassword, setOriginalPassword] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFileKK, setSelectedFileKK] = useState(null);
     const [showPopupFoto, setShowPopupFoto] = useState(false);
+    const [showPopupKartuKeluarga, setShowPopupKartuKeluarga] = useState(false);
 
     //Menampilkan Data Profil
     const fetchProfil = async () => {
@@ -86,6 +91,58 @@ const ProfilEdit = () => {
         }
     }, [showPopupFoto]);
 
+    //Mengupload Kartu Keluarga
+    const uploadKartuKeluarga = async () => {
+        const id_pegawai = localStorage.getItem('id_pegawai');
+        const formData = new FormData();
+        formData.append('kartu_keluarga', selectedFileKK);
+        try {
+            const response = await axios.post(`http://localhost:5000/api/data_pegawai/pegawai/upload-kk/${id_pegawai}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log('Kartu keluarga berhasil diunggah:', response.data);
+            setShowPopupKartuKeluarga(true);
+            fetchProfil(); // Refresh profil setelah mengunggah foto
+        } catch (error) {
+            console.error('Error uploading profile photo:', error);
+        }
+    };
+
+    useEffect(() => {
+        if (selectedFileKK) {
+            uploadKartuKeluarga();
+        }
+    }, [selectedFileKK]);
+
+    const handleFileKK = (e) => {
+        setSelectedFileKK(e.target.files[0]);
+    };
+
+    const handleUploadClick = () => {
+        document.getElementById('fileKKInput').click();
+    };
+
+    useEffect(() => {
+        if (showPopupKartuKeluarga) {
+            const timer = setTimeout(() => {
+                setShowPopupKartuKeluarga(false);
+            }, 2000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [showPopupKartuKeluarga]);
+
+    //Menampilkan Kartu Keluarga
+    const viewKartuKeluarga = () => {
+        const id_pegawai = localStorage.getItem('id_pegawai');
+        const token = localStorage.getItem('token');
+        const url = `http://localhost:5000/api/data_pegawai/pegawai/view-kk/${id_pegawai}`;
+        window.open(url, '_blank');
+    };
+
+
     //Mengedit Data Profil
     const updateProfil = async () => {
         const token = localStorage.getItem('token');
@@ -142,7 +199,6 @@ const ProfilEdit = () => {
         }
     }, [showPopupEdit]);
 
-
     return (
         <div>
             <div className="relative py-4 flex items-center justify-between w-full">
@@ -197,7 +253,7 @@ const ProfilEdit = () => {
                     <table className='w-full border-separate px-10 py-3 text-gray-950 text-sm'>
                         <tbody>
                             <tr>
-                                <td>Nama Lengkap</td>
+                                <td className="w-1/3">Nama Lengkap</td>
                                 <td className="p-2">:</td>
                                 <td className="px-2 border border-gray-400 rounded-md">
                                     <input
@@ -211,7 +267,7 @@ const ProfilEdit = () => {
                                 </td>
                             </tr>
                             <tr>
-                                <td>Email</td>
+                                <td className="w-1/3">Email</td>
                                 <td className="p-2">:</td>
                                 <td className="px-2 border border-gray-400 rounded-md">
                                     <input
@@ -226,7 +282,7 @@ const ProfilEdit = () => {
                             </tr>
                             {isEditable && (
                                 <tr>
-                                    <td>Password</td>
+                                    <td className="w-1/3">Password</td>
                                     <td className="p-2">:</td>
                                     <td className="px-2 border border-gray-400 rounded-md relative">
                                         <input
@@ -238,14 +294,14 @@ const ProfilEdit = () => {
                                             className={`w-full border-none bg-transparent focus:outline-none ${isEditable ? 'bg-white' : ''}`}
                                         />
                                         {/* Icon mata untuk melihat/sembunyikan password */}
-                                            <div className="absolute right-2 top-2 cursor-pointer" onClick={toggleShowPassword}>
-                                                {showPassword ? <FaEyeSlash /> : <FaEye />}
-                                            </div>
+                                        <div className="absolute right-2 top-2 cursor-pointer" onClick={toggleShowPassword}>
+                                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                        </div>
                                     </td>
                                 </tr>
                             )}
                             <tr>
-                                <td>Tempat, Tanggal Lahir</td>
+                                <td className="w-1/3">Tempat, Tanggal Lahir</td>
                                 <td className="p-2">:</td>
                                 <td className="flex items-center gap-2">
                                     <div className="flex-1">
@@ -271,7 +327,7 @@ const ProfilEdit = () => {
                                 </td>
                             </tr>
                             <tr>
-                                <td>Alamat</td>
+                                <td className="w-1/3">Alamat</td>
                                 <td className="p-2">:</td>
                                 <td className="px-2 border border-gray-400 rounded-md">
                                     <input
@@ -285,7 +341,7 @@ const ProfilEdit = () => {
                                 </td>
                             </tr>
                             <tr>
-                                <td>Nomor Telepon</td>
+                                <td className="w-1/3">Nomor Telepon</td>
                                 <td className="p-2">:</td>
                                 <td className="px-2 border border-gray-400 rounded-md">
                                     <input
@@ -299,7 +355,7 @@ const ProfilEdit = () => {
                                 </td>
                             </tr>
                             <tr>
-                                <td>Posisi</td>
+                                <td className="w-1/3">Posisi</td>
                                 <td className="p-2">:</td>
                                 <td className="px-2 border border-gray-400 rounded-md">
                                     <input
@@ -312,7 +368,7 @@ const ProfilEdit = () => {
                                 </td>
                             </tr>
                             <tr>
-                                <td>Status BPJS</td>
+                                <td className="w-1/3">Status BPJS</td>
                                 <td className="p-2">:</td>
                                 <td className="px-2 border border-gray-400 rounded-md">
                                     <select
@@ -328,7 +384,7 @@ const ProfilEdit = () => {
                                 </td>
                             </tr>
                             <tr>
-                                <td>Status Perkawinan</td>
+                                <td className="w-1/3">Status Perkawinan</td>
                                 <td className="p-2">:</td>
                                 <td className="px-2 border border-gray-400 rounded-md">
                                     <select
@@ -343,37 +399,67 @@ const ProfilEdit = () => {
                                     </select>
                                 </td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                {!isEditable && (
+                <div className="flex-1">
+                    <h1 className="flex px-6 pt-4 text-xs font-thin">DATA KELUARGA</h1>
+                    <table className='w-full border-separate px-10 py-3 text-gray-950 text-sm'>
+                        <tbody>
                             <tr>
-                                <td>Data Anggota Keluarga</td>
-                                <td className="p-2">:</td>
-                                <td className="px-2 border border-gray-400 rounded-md">
-                                    <input
-                                        type="text"
-                                        name="anggota_keluarga"
-                                        value={profil.anggota_keluarga}
-                                        readOnly={!isEditable}
-                                        onChange={handleChange}
-                                        className={`w-full border-none bg-transparent focus:outline-none ${isEditable ? 'bg-white' : ''}`}
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Jumlah Tanggungan</td>
-                                <td className="p-2">:</td>
-                                <td className="px-2 border border-gray-400 rounded-md">
-                                    <input
-                                        type="number"
-                                        name="jumlah_tanggungan"
-                                        value={profil.jumlah_tanggungan}
-                                        readOnly={!isEditable}
-                                        onChange={handleChange}
-                                        className={`w-full border-none bg-transparent focus:outline-none ${isEditable ? 'bg-white' : ''}`}
-                                    />
+                                <td className="w-1/3">Data Anggota Keluarga</td>
+                                <td className="p-1">:</td>
+                                <td className="px-2 font-semibold text-sm">
+                                    {profil.kartu_keluarga ? (
+                                        <div className='flex flex-row gap-3'>
+                                            <button
+                                                className='flex justify-start items-center bg-sky-400 px-3 py-1 rounded-sm'
+                                                onClick={viewKartuKeluarga}
+                                            >
+                                                <MdOutlineRemoveRedEye fontSize={16} className='mr-1' />
+                                                Lihat
+                                            </button>
+                                            <button
+                                                className='flex justify-start items-center bg-sky-400 px-3 py-1 rounded-sm'
+                                                onClick={handleUploadClick}
+                                            >
+                                                <MdEdit fontSize={18} className='mr-1' />
+                                                Edit
+                                            </button>
+                                            <input
+                                                type="file"
+                                                id="fileKKInput"
+                                                style={{ display: 'none' }}
+                                                accept=".jpg, .jpeg, .png, .pdf"
+                                                onChange={handleFileKK}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <button
+                                                className='flex justify-start items-center bg-green-500 px-3 py-1 rounded-sm'
+                                                onClick={handleUploadClick}
+                                            >
+                                                <TbUpload fontSize={18} className='mr-1' />
+                                                Upload Kartu Keluarga
+                                            </button>
+                                            <input
+                                                type="file"
+                                                id="fileKKInput"
+                                                style={{ display: 'none' }}
+                                                accept=".jpg, .jpeg, .png, .pdf"
+                                                onChange={handleFileKK}
+                                            />
+                                        </div>
+                                    )}
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                )}
 
                 {showPopupEdit && (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -387,6 +473,14 @@ const ProfilEdit = () => {
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                         <div className="bg-white font-semibold text-green-900 px-12 py-5 rounded-md shadow-lg">
                             <p>Update Foto Profil Berhasil</p>
+                        </div>
+                    </div>
+                )}
+
+                {showPopupKartuKeluarga && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                        <div className="bg-white font-semibold text-green-900 px-12 py-5 rounded-md shadow-lg">
+                            <p>Update Kartu Keluarga Berhasil</p>
                         </div>
                     </div>
                 )}

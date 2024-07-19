@@ -21,8 +21,6 @@ const TambahDataPegawai = () => {
     role: '',
     status_bpjs: '',
     status_kawin: '',
-    anggota_keluarga: '',
-    jumlah_tanggungan: '',
   });
 
   const handleInputChange = (event) => {
@@ -261,36 +259,6 @@ const TambahDataPegawai = () => {
                 <option value="Belum Menikah" className='text-black'>Belum Menikah</option>
                 <option value="Menikah" className='text-black'>Menikah</option>
               </select>
-            </div>
-            <div>
-              <div className='flex flex-row'>
-                <span className='text-gray-900 text-sm font-medium'>Data Anggota Keluarga</span>
-                <span className='text-red-700'>*</span>
-              </div>
-              <input
-                type="text"
-                name="anggota_keluarga"
-                value={formData.anggota_keluarga}
-                onChange={handleInputChange}
-                placeholder="Masukkan data keluarga"
-                className="text-sm focus:outline-gray-400 active:outline-gray-400 border border-gray-300 w-full h-10 pl-2 rounded-md"
-                required
-              />
-            </div>
-            <div>
-              <div className='flex flex-row'>
-                <span className='text-gray-900 text-sm font-medium'>Jumlah Tanggungan</span>
-                <span className='text-red-700'>*</span>
-              </div>
-              <input
-                type="number"
-                name="jumlah_tanggungan"
-                value={formData.jumlah_tanggungan}
-                onChange={handleInputChange}
-                placeholder="Jumlah tanggungan keluarga"
-                className="text-sm focus:outline-gray-400 active:outline-gray-400 border border-gray-300 w-full h-10 pl-2 rounded-md"
-                required
-              />
             </div>
           </div>
         </div>
