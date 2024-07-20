@@ -42,8 +42,7 @@ router.get('/pelatihan', (req, res) => {
         pel.tanggal_selesai,
         pel.deskripsi_kegiatan,
         pel.status,
-        pel.bukti_pelaksanaan,
-        pel.sertifikat
+        pel.bukti_pelaksanaan
     FROM 
         data_pelatihan pel
     JOIN 
@@ -74,8 +73,7 @@ router.get('/pelatihan/:id_pelatihan', (req, res) => {
         pel.tanggal_selesai,
         pel.deskripsi_kegiatan,
         pel.status,
-        pel.bukti_pelaksanaan,
-        pel.sertifikat
+        pel.bukti_pelaksanaan
     FROM 
         data_pelatihan pel
     JOIN 
@@ -110,42 +108,40 @@ router.get('/pelatihan/:id_pelatihan', (req, res) => {
     });
 });
 
-// Mengupload sertifikat
-router.post('/upload/:id_pelatihan', upload.single('sertifikat'), (req, res) => {
+// Menampilkan Bukti Pelaksanaan
+router.get('/pelatihan/view-bukti/:id_pelatihan', (req, res) => {
     const { id_pelatihan } = req.params;
-    const file = req.file;
 
-    if (!file) {
-        return res.status(400).json({ message: 'No file uploaded' });
-    }
-
-    const fileBuffer = file.buffer;
-
-    const query = 'UPDATE data_pelatihan SET sertifikat = ? WHERE id_pelatihan = ?';
-    db.query(query, [fileBuffer, id_pelatihan], (err, result) => {
+    const sql = 'SELECT bukti_pelaksanaan FROM data_pelatihan WHERE id_pelatihan = ?';
+    db.query(sql, [id_pelatihan], (err, result) => {
         if (err) {
-            console.error('Error uploading file to the database:', err);
-            return res.status(500).json({ message: 'Error uploading file' });
-        }
-        res.status(200).json({ message: 'File uploaded successfully' });
-    });
-});
-
-// Menampilkan Sertifikat
-router.get('/sertifikat/:id_pelatihan', (req, res) => {
-    const { id_pelatihan } = req.params;
-    const query = `SELECT sertifikat FROM data_pelatihan WHERE id_pelatihan = ?`;
-    db.query(query, [id_pelatihan], (err, result) => {
-        if (err) {
-            console.error('Error fetching sertifikat:', err);
+            console.error('Error executing query:', err);
             return res.status(500).json({ error: 'Internal server error' });
         }
-        if (result.length === 0 || !result[0].sertifikat) {
-            return res.status(404).json({ error: 'Sertifikat not found' });
+
+        if (result.length > 0) {
+            const buktiPelaksanaan = result[0].bukti_pelaksanaan;
+            if (buktiPelaksanaan) {
+                const buffer = Buffer.from(buktiPelaksanaan, 'base64');
+
+                // Default type is jpeg
+                let contentType = 'image/jpeg';
+                const fileSignature = buffer.slice(0, 4).toString('hex');
+
+                if (fileSignature === '89504e47') {
+                    contentType = 'image/png';
+                } else if (fileSignature === '25504446') {
+                    contentType = 'application/pdf';
+                }
+                
+                res.setHeader('Content-Type', contentType);
+                res.send(buffer);
+            } else {
+                res.status(404).json({ error: 'Bukti Pelaksanaan not found' });
+            }
+        } else {
+            res.status(404).json({ error: 'Pelatihan not found' });
         }
-        const fileBuffer = result[0].sertifikat;
-        res.setHeader('Content-Type', 'application/pdf');
-        res.send(fileBuffer);
     });
 });
 
@@ -261,8 +257,7 @@ router.get('/jadwalpelatihan/:id_pegawai', (req, res) => {
         pel.tanggal_selesai,
         pel.deskripsi_kegiatan,
         pel.status,
-        pel.bukti_pelaksanaan,
-        pel.sertifikat
+        pel.bukti_pelaksanaan
     FROM 
         data_pelatihan pel
     JOIN 

@@ -80,11 +80,13 @@ const TambahJadwalPelatihan = () => {
               <select
                 name="id_pegawai"
                 id="id_pegawai"
-                value={idPegawai.length === 1 ? idPegawai[0] : 'ALL'}
+                value={idPegawai.length === 1 ? idPegawai[0] : idPegawai.length ? 'ALL' : ''}
                 onChange={handleSelectChange}
                 className={`text-sm focus:outline-gray-400 active:outline-gray-400 border border-gray-300 w-full h-10 pl-2 rounded-md ${idPegawai.length ? 'text-black' : 'text-gray-400'}`}
                 required
+                defaultValue=""
               >
+                <option value="" disabled selected className='text-gray-400'>Masukkan nama pegawai</option>
                 <option value="ALL" className='text-black'>Pilih Semua Pegawai</option>
                 {pegawaiList.map((pegawai) => (
                   <option className='text-black' key={pegawai.id_pegawai} value={pegawai.id_pegawai}>

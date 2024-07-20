@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { HiOutlineSearch , HiChevronRight} from 'react-icons/hi';
+import { HiOutlineSearch, HiChevronRight, HiChevronLeft } from 'react-icons/hi';
 import { TbCheck } from "react-icons/tb";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,8 @@ import { getPegawaiStatus } from '../../utils/status';
 
 function HistoryPelatihan() {
   const [historiPelatihan, setHistoriPelatihan] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +34,30 @@ function HistoryPelatihan() {
 
   const filteredPelatihan = historiPelatihan.filter((data) =>
     data.nama_pegawai.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    data.nama_kegiatan.toLowerCase().includes(searchTerm.toLowerCase()) 
+    data.nama_kegiatan.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Membagi data ke halaman-halaman
+  const totalPages = Math.ceil(filteredPelatihan.length / itemsPerPage);
+  const currentPageData = filteredPelatihan.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  // Fungsi untuk navigasi halaman
+  const goToPreviousPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const BoxWrapper = ({ children, isActive, onClick }) => (
+    <button
+      className={`rounded-sm px-2.5 py-1 flex-1 border-none flex items-center text-xs font-semibold ${isActive ? 'bg-green-900 text-white' : 'hover:bg-green-900'
+        }`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
   );
 
   return (
@@ -61,27 +86,26 @@ function HistoryPelatihan() {
                 <td className='font-bold py-4'>Penyelenggara</td>
                 <td className='font-bold py-4'>Nama Kegiatan</td>
                 <td className='font-bold py-4'>Status</td>
-                <td className='font-bold py-4'>Sertifikat</td>
                 <td className='font-bold py-4'>Action</td>
               </tr>
             </thead>
 
             <tbody>
-              {filteredPelatihan.map((data, index) => (
+              {currentPageData.length === 0 && (
+                <tr>
+                  <td colSpan="10" className="text-center py-4">
+                    Tidak ada histori pelatihan untuk ditampilkan.
+                  </td>
+                </tr>
+              )}
+              {currentPageData.map((data, index) => (
                 <tr key={index}>
-                  <td className="p-1 pt-2">{index + 1}</td>
+                  <td className="p-1 pt-2">{(currentPage - 1) * itemsPerPage + index + 1}</td>
                   <td>{data.nip}</td>
                   <td>{data.nama_pegawai}</td>
                   <td>{data.nama_penyelenggara}</td>
                   <td>{data.nama_kegiatan}</td>
                   <td>{getPegawaiStatus(data.status)}</td>
-                  <td className='flex items-center justify-center pt-2'>
-                    {data.sertifikat ?
-                      <TbCheck fontSize={18} className='text-green-600' />
-                      :
-                      <IoMdClose fontSize={18} className='text-red-600' />
-                    }
-                  </td>
                   <td className='font-semibold'>
                     <button onClick={() => navigate(`/AdminPage/detail_history_pelatihan/${data.id_pelatihan}`)} className='flex justify-start items-center'>
                       Detail
@@ -93,6 +117,23 @@ function HistoryPelatihan() {
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Navigasi Halaman */}
+      <div className='py-2 justify-end flex flex-row items-center'>
+        <button onClick={goToPreviousPage} disabled={currentPage === 1}><HiChevronLeft fontSize={18} className='mr-2' /></button>
+        <div className='flex gap-4'>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <BoxWrapper
+              key={index}
+              isActive={currentPage === index + 1}
+              onClick={() => setCurrentPage(index + 1)}
+            >
+              {index + 1}
+            </BoxWrapper>
+          ))}
+        </div>
+        <button onClick={goToNextPage} disabled={currentPage === totalPages}><HiChevronRight fontSize={18} className='ml-2' /></button>
       </div>
     </div>
   )

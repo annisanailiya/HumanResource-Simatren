@@ -76,7 +76,7 @@ function JadwalPelatihan() {
 
         <div className='flex justify-between mx-2 md:mx-10'>
           <HiMiniPlus fontSize={22} className="text-neutral-50 absolute top-1/2 -translate-y-1/2 ml-2" />
-          <button onClick={() => navigate('/AdminPage/atur_jadwal_pelatihan')} className="text-xs text-white bg-green-900 rounded-sm h-10 px-10 w-fit">
+          <button onClick={() => navigate('/AdminPage/atur_jadwal_pelatihan')} className="text-xs text-white font-semibold bg-green-900 rounded-sm h-10 px-10 w-fit">
             Atur Jadwal Pelatihan
           </button>
         </div>
@@ -98,6 +98,13 @@ function JadwalPelatihan() {
             </thead>
 
             <tbody>
+              {currentPageData.length === 0 && (
+                <tr>
+                  <td colSpan="10" className="text-center py-4">
+                    Tidak ada jadwal pelatihan untuk ditampilkan.
+                  </td>
+                </tr>
+              )}
               {currentPageData.map((data, index) => (
                 <tr key={index}>
                   <td className="p-1 pt-2">{(currentPage - 1) * itemsPerPage + index + 1}</td>
