@@ -97,6 +97,13 @@ function ManajemenPegawai() {
                                 </tr>
                             </thead>
                             <tbody>
+                                {currentPageData.length === 0 && (
+                                    <tr>
+                                        <td colSpan="10" className="text-center py-4">
+                                            Tidak ada data pegawai untuk ditampilkan.
+                                        </td>
+                                    </tr>
+                                )}
                                 {currentPageData.map((data, index) => (
                                     <tr key={index}>
                                         <td className="p-1 pt-2">{(currentPage - 1) * itemsPerPage + index + 1}</td>

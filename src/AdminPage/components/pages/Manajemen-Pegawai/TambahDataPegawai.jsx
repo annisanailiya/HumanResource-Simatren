@@ -44,10 +44,8 @@ const TambahDataPegawai = () => {
 
       const response = await axios.post('http://localhost:5000/api/data_pegawai/pegawai', formDataWithHashedPassword);
       setShowPopup(true);
-      setErrorMessage('');
     } catch (error) {
       console.error('Error saving data:', error);
-      setErrorMessage('Error saving data. Please try again.');
     }
   };
 

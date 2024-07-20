@@ -48,10 +48,10 @@ const PengajuanCuti = () => {
 
   return (
     <div className="px-5">
-      <div className="relative py-4 w-fit md:w-full justify-between flex flex-row">
+      <div className="relative py-4 flex items-center justify-between w-full">
         <p className="text-xl font-bold mb-4 px-5">Pengajuan Cuti</p>
 
-        <div className="mx-2">
+        <div className="absolute right-4">
           <button
             type="button"
             onClick={() => navigate('/UserPage/histori_cuti')}
