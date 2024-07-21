@@ -1,8 +1,6 @@
 import express from 'express';
 import db from '../db.js';
 import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
 
 const router = express.Router();
 
@@ -15,6 +13,28 @@ router.get('/pelatihan-per-bulan', (req, res) => {
     GROUP BY MONTH(tanggal_mulai)
   `;
     db.query(query, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: 'Internal Server Error' });
+        }
+        res.json(results);
+    });
+});
+
+// Mendapatkan jumlah pelatihan per bulan berdasarkan status dan id_pegawai
+router.get('/pelatihan-per-bulan/:id_pegawai', (req, res) => {
+    const { id_pegawai } = req.params;
+    const query = `
+    SELECT 
+      MONTH(tanggal_mulai) AS bulan, 
+      status,
+      COUNT(*) AS jumlah_pelatihan
+    FROM data_pelatihan
+    WHERE id_pegawai = ?
+    GROUP BY MONTH(tanggal_mulai), status
+    ORDER BY MONTH(tanggal_mulai)
+  `;
+    db.query(query, [id_pegawai], (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: 'Internal Server Error' });
@@ -133,7 +153,7 @@ router.get('/pelatihan/view-bukti/:id_pelatihan', (req, res) => {
                 } else if (fileSignature === '25504446') {
                     contentType = 'application/pdf';
                 }
-                
+
                 res.setHeader('Content-Type', contentType);
                 res.send(buffer);
             } else {
@@ -238,7 +258,6 @@ router.put('/pelatihan/status/:id_pelatihan', (req, res) => {
         res.json({ message: 'Status updated successfully' });
     });
 });
-
 
 //USER
 //Menampilkan jadwal pelatihan berdasarkan id pegawai
