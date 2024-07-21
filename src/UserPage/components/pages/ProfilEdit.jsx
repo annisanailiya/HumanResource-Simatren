@@ -415,14 +415,14 @@ const ProfilEdit = () => {
                                     {profil.kartu_keluarga ? (
                                         <div className='flex flex-row gap-3'>
                                             <button
-                                                className='flex justify-start items-center bg-sky-400 px-3 py-1 rounded-sm'
+                                                className='flex justify-start items-center bg-green-500 px-3 py-1 rounded-sm'
                                                 onClick={viewKartuKeluarga}
                                             >
                                                 <MdOutlineRemoveRedEye fontSize={16} className='mr-1' />
                                                 Lihat
                                             </button>
                                             <button
-                                                className='flex justify-start items-center bg-sky-400 px-3 py-1 rounded-sm'
+                                                className='flex justify-start items-center bg-green-500 px-3 py-1 rounded-sm'
                                                 onClick={handleUploadClick}
                                             >
                                                 <MdEdit fontSize={18} className='mr-1' />

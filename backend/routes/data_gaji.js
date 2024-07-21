@@ -1,5 +1,4 @@
 import xlsx from 'xlsx';
-import fs from 'fs';
 import { format } from 'date-fns';
 import express from 'express';
 import multer from 'multer';
