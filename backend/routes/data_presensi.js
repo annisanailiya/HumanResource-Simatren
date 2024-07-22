@@ -15,7 +15,10 @@ router.get('/presensi', (req, res) => {
         pr.tanggal_presensi,
         pr.jam_masuk,
         pr.jam_keluar,
-        pr.total_jam_kerja
+        CONCAT(
+        FLOOR(TIMESTAMPDIFF(MINUTE, pr.jam_masuk, pr.jam_keluar) / 60), ' jam ',
+        MOD(TIMESTAMPDIFF(MINUTE, pr.jam_masuk, pr.jam_keluar), 60), ' menit'
+        ) AS total_jam_kerja
     FROM 
         data_presensi pr
     JOIN 
@@ -113,7 +116,10 @@ router.get('/presensi/:id_pegawai', (req, res) => {
         pr.tanggal_presensi,
         pr.jam_masuk,
         pr.jam_keluar,
-        pr.total_jam_kerja
+        CONCAT(
+        FLOOR(TIMESTAMPDIFF(MINUTE, pr.jam_masuk, pr.jam_keluar) / 60), ' jam ',
+        MOD(TIMESTAMPDIFF(MINUTE, pr.jam_masuk, pr.jam_keluar), 60), ' menit'
+        ) AS total_jam_kerja
     FROM 
         data_presensi pr
     JOIN 

@@ -112,11 +112,10 @@ function ManajemenPresensi() {
                     <td>{data.nama_pegawai}</td>
                     <td>{data.tanggal_presensi}</td>
                     <td>{data.jam_masuk}</td>
-                    <td>{data.jam_keluar}</td>
-                    <div className='flex-row'>
-                      <td>{data.total_jam_kerja}</td>
-                      <td>Jam</td>
-                    </div>
+                    <td className={data.jam_keluar ? '' : 'text-red-700'}>
+                      {data.jam_keluar ? data.jam_keluar : '(Belum Scan)'}
+                    </td>
+                    <td>{data.total_jam_kerja !== null ? `${data.total_jam_kerja}` : '-'}</td>
                   </tr>
                 ))}
               </tbody>

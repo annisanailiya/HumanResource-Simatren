@@ -111,7 +111,7 @@ const HistoriPresensi = () => {
                     <td className={data.jam_keluar ? '' : 'text-red-700'}>
                       {data.jam_keluar ? data.jam_keluar : '(Belum Scan)'}
                     </td>
-                    <td>{data.total_jam_kerja !== null ? `${data.total_jam_kerja} Jam` : '-'}</td>
+                    <td>{data.total_jam_kerja !== null ? `${data.total_jam_kerja}` : '-'}</td>
                   </tr>
                 ))}
               </tbody>
