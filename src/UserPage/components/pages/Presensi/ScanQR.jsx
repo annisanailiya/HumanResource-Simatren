@@ -53,16 +53,16 @@ const ScanQR = () => {
   }, [isScanningMasuk, isScanningKeluar]);
 
   const handleScanMasuk = (data) => {
-    if (data) {
+    const idPegawai = localStorage.getItem('id_pegawai'); // Mengambil id_pegawai dari localStorage
+    if (data && idPegawai) {
       setScanResultMasuk(data.text);
       console.log(data);
-      fetch('http://localhost:5000/api/save-presensi', {  // Pastikan URL sesuai
+      fetch(`http://localhost:5000/api/data_presensi/save-presensi/${idPegawai}`, {  
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          result: data.text,
           type: 'masuk',
           timestamp: new Date().toISOString(),
         }),
@@ -79,16 +79,16 @@ const ScanQR = () => {
   };
 
   const handleScanKeluar = (data) => {
-    if (data) {
+    const idPegawai = localStorage.getItem('id_pegawai'); // Mengambil id_pegawai dari localStorage
+    if (data && idPegawai) {
       setScanResultKeluar(data.text);
       console.log(data);
-      fetch('http://localhost:5000/api/save-presensi', {  // Pastikan URL sesuai
+      fetch(`http://localhost:5000/api/data_presensi/save-presensi/${idPegawai}`, { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          result: data.text,
           type: 'keluar',
           timestamp: new Date().toISOString(),
         }),

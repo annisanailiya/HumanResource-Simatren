@@ -49,9 +49,8 @@ const HistoriPresensi = () => {
 
   const BoxWrapper = ({ children, isActive, onClick }) => (
     <button
-      className={`rounded-sm px-2.5 py-1 flex-1 border-none flex items-center text-xs font-semibold ${
-        isActive ? 'bg-green-900 text-white' : 'hover:bg-green-900'
-      }`}
+      className={`rounded-sm px-2.5 py-1 flex-1 border-none flex items-center text-xs font-semibold ${isActive ? 'bg-green-900 text-white' : 'hover:bg-green-900'
+        }`}
       onClick={onClick}
     >
       {children}
@@ -98,11 +97,20 @@ const HistoriPresensi = () => {
                 {currentPageData.map((presensi, index) => (
                   <tr key={presensi.id_presensi}>
                     <td className="p-1 pt-2">{(currentPage - 1) * itemsPerPage + index + 1}</td>
+<<<<<<< Updated upstream
                     <td>{presensi.nama_pegawai}</td>
                     <td>{new Date(presensi.tanggal_presensi).toLocaleDateString()}</td>
                     <td>{presensi.jam_masuk}</td>
                     <td>{presensi.jam_keluar}</td>
                     <td>{presensi.total_jam_kerja} Jam</td>
+=======
+                    <td>{data.tanggalPresensi}</td>
+                    <td>{data.jam_masuk}</td>
+                    <td className={data.jam_keluar ? '' : 'text-red-700'}>
+                      {data.jam_keluar ? data.jam_keluar : '(Belum Scan)'}
+                    </td>
+                    <td>{data.total_jam_kerja !== null ? `${data.total_jam_kerja} Jam` : '-'}</td>
+>>>>>>> Stashed changes
                   </tr>
                 ))}
               </tbody>
