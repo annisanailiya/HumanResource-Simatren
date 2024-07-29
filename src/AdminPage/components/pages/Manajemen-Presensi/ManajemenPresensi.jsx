@@ -108,7 +108,7 @@ function ManajemenPresensi() {
               </thead>
 
               <tbody>
-                {currentCutiData.length === 0 && (
+                {currentPageData.length === 0 && (
                     <tr>
                       <td colSpan="10" className="text-center py-4">
                         Tidak ada Presensi untuk ditampilkan.
