@@ -249,10 +249,14 @@ router.get('/presensi/:id_pegawai', (req, res) => {
 // Menambahkan data presensi saat pegawai scan QR
 router.post('/save-presensi/:id_pegawai', (req, res) => {
     const { id_pegawai } = req.params;
-    const { type, timestamp } = req.body;
+    const { type, timestamp, token } = req.body;
 
     if (!id_pegawai) {
         return res.status(400).json({ message: 'id_pegawai is required' });
+    }
+
+    if (!validateToken(token)) {
+        return res.status(400).json({ message: 'Invalid or expired QR code' });
     }
 
     const datetime = moment(timestamp).tz('Asia/Jakarta'); 
